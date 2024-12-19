@@ -13,6 +13,24 @@
         android:theme="@style/Theme.BarberBookingApp"
         tools:targetApi="31">
         <activity
+            android:name=".GeneralModule.BarberLogin"
+            android:exported="true" />
+        <activity
+            android:name=".GeneralModule.BarberSignUp"
+            android:exported="true" />
+        <activity
+            android:name=".GeneralModule.ForgotPassword"
+            android:exported="true" />
+        <activity
+            android:name=".GeneralModule.Login"
+            android:exported="true" />
+        <activity
+            android:name=".GeneralModule.SignUp"
+            android:exported="true" />
+        <activity
+            android:name=".GeneralModule.Splashing"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
