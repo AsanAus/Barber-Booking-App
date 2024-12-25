@@ -3,6 +3,7 @@ package com.example.barberbookingapp.GeneralModule;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.BarberManagementModule.BarberHome;
 import com.example.barberbookingapp.R;
+import com.example.barberbookingapp.UserManagementModule.home;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,8 +34,8 @@ import java.util.Objects;
 public class BarberLogin extends AppCompatActivity {
 
     private TextView signupText, forgotPasswordText, loginAsUserText;
-    EditText loginUsername, loginPassword;
-    Button loginBtn;
+    private EditText EtUsername, EtPass;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class BarberLogin extends AppCompatActivity {
             }
         });
 
-        //click text to go Barber Login activity
+        //click text to go User Login activity
         loginAsUserText = findViewById(R.id.TVBarber);
         loginAsUserText.setText(Html.fromHtml("<u>Login as User</u>"));
         loginAsUserText.setOnClickListener(new View.OnClickListener() {
@@ -71,17 +74,28 @@ public class BarberLogin extends AppCompatActivity {
             }
         });
 
-        loginUsername = findViewById(R.id.ETUsername);
-        loginPassword = findViewById(R.id.ETPassword);
-        loginBtn = findViewById(R.id.BtnSignUp);
+        EtUsername = findViewById(R.id.ETUsername);
+        EtPass = findViewById(R.id.ETPassword);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        auth = FirebaseAuth.getInstance();
+
+        Button btnLogin = findViewById(R.id.BtnSignUp);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!validateUsername() | !validatePassword()){
+                String username = EtUsername.getText().toString();
+                String pass = EtPass.getText().toString();
 
+                if(TextUtils.isEmpty(username)){
+                    Toast.makeText(BarberLogin.this, "Please enter your username", Toast.LENGTH_SHORT).show();
+                    EtUsername.setError("Username is required");
+                    EtUsername.requestFocus();
+                } else if(TextUtils.isEmpty(pass)){
+                    Toast.makeText(BarberLogin.this, "Please enter your password", Toast.LENGTH_SHORT).show();
+                    EtPass.setError("Password is required");
+                    EtPass.requestFocus();
                 } else{
-                    checkUser();
+                    loginBarber(username, pass);
                 }
             }
         });
@@ -93,63 +107,42 @@ public class BarberLogin extends AppCompatActivity {
         });
     }
 
-    public Boolean validateUsername(){
-        String val = loginUsername.getText().toString();
-        if(val.isEmpty()){
-            loginUsername.setError("Username cannot be empty");
-            return false;
-        } else{
-            loginUsername.setError(null);
-            return true;
-        }
-    }
+    private void loginBarber(String username, String pass) {
+        // Reference to the Usernames node in Firebase
+        DatabaseReference usernameReference = FirebaseDatabase.getInstance().getReference("Usernames");
 
-    public Boolean validatePassword(){
-        String val = loginPassword.getText().toString();
-        if(val.isEmpty()){
-            loginPassword.setError("Password cannot be empty");
-            return false;
-        } else{
-            loginPassword.setError(null);
-            return true;
-        }
-    }
-
-    public void checkUser(){
-        String userUsername = loginUsername.getText().toString().trim();
-        String userPassword = loginPassword.getText().toString().trim();
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Barbers");
-        Query checkUserDatabase = reference.orderByChild("username").equalTo(userUsername);
-
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        // Check if the username exists
+        usernameReference.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    loginUsername.setError(null);
-                    String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
+                if (snapshot.exists()) {
+                    // Retrieve the email associated with the username
+                    String email = snapshot.getValue(String.class);
 
-                    if(Objects.equals(passwordFromDB, userPassword)){
-                        loginUsername.setError(null);
-                        Intent intent = new Intent(BarberLogin.this, BarberHome.class);
-                        startActivity(intent);
-                        Toast.makeText(BarberLogin.this, "Welcome Barber!", Toast.LENGTH_SHORT).show();
-
-                    }else{
-                        loginPassword.setError("Invalid Credentials");
-                        loginPassword.requestFocus();
-                    }
-                }else{
-                    loginUsername.setError("User does not exist");
-                    loginUsername.requestFocus();
+                    // Proceed to authenticate with email and password
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Login successful
+                            Toast.makeText(BarberLogin.this, "Login successful!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(BarberLogin.this, BarberHome.class);
+                            startActivity(intent);
+                        } else {
+                            // Login failed
+                            Toast.makeText(BarberLogin.this, "Invalid username or password. Please try again.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    // Username does not exist
+                    Toast.makeText(BarberLogin.this, "Username does not exist. Please check and try again.", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle database errors
+                Toast.makeText(BarberLogin.this, "Database error. Please try again later.", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
