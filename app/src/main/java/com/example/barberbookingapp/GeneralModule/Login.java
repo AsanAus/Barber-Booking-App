@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.barberbookingapp.UserManagementModule.HomePage;
 import com.example.barberbookingapp.UserManagementModule.home;
 import com.example.barberbookingapp.R;
 import com.google.firebase.database.DataSnapshot;
@@ -135,7 +136,7 @@ public class Login extends AppCompatActivity {
 
                     if(Objects.equals(passwordFromDB, userPassword)){
                         loginUsername.setError(null);
-                        Intent intent = new Intent(Login.this, home.class);
+                        Intent intent = new Intent(Login.this, HomePage.class);
                         startActivity(intent);
                         Toast.makeText(Login.this, "successfully login", Toast.LENGTH_SHORT).show();
 
