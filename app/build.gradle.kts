@@ -32,6 +32,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(libs.appcompat)
@@ -44,7 +45,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
+    implementation(libs.glide)
+    implementation(libs.play.services.auth.v2070)
+    implementation (libs.facebook.android.sdk)
 
 
 }

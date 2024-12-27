@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Barber Booking App</string>
+    <string name="client_id">546449899781-utpmo49k98r13rnicnvshm2cn3m9c685.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">1234</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
 </resources>
