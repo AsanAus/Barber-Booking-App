@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.GeneralModule.Splashing;
+import com.example.barberbookingapp.UserManagementModule.HomePage;
 
 public class MainActivity extends AppCompatActivity {
 

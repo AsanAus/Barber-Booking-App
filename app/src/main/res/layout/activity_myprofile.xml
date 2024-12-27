@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundmyprofile"
+    tools:context=".UserManagementModule.myprofile">
+
+    <TextView
+        android:id="@+id/TVMyProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="My Profile"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Updated SimpleDraweeView for Fresco -->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/IVMyProfilePicture"
+        android:layout_width="167dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="148dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        fresco:actualImageScaleType="centerCrop"
+        fresco:placeholderImage="@drawable/usericon" />
+
+    <TextView
+        android:id="@+id/TVusername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Hassan Firdaus"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IVMyProfilePicture" />
+
+    <TextView
+        android:id="@+id/TVemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter"
+        android:text="hassanfirdaus00@gmail.com"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVusername" />
+
+    <Button
+        android:id="@+id/BTNeditprofile"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/editprofilebutton"
+        android:drawableStart="@drawable/smallusericon"
+        android:fontFamily="@font/inter"
+        android:text="  Edit Profile"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVemail" />
+
+    <Button
+        android:id="@+id/BTNLogOut"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/logoutbutton"
+        android:drawableStart="@drawable/logouticon"
+        android:fontFamily="@font/inter"
+        android:text="  Log Out"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BTNeditprofile" />
+
+    <TextView
+        android:id="@+id/TVbacktoHomePage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Back"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
