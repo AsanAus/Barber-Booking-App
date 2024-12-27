@@ -17,6 +17,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.barberbookingapp.UserManagementModule.HomePage;
 import com.example.barberbookingapp.UserManagementModule.home;
 import com.example.barberbookingapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -131,12 +132,12 @@ public class Login extends AppCompatActivity {
                     String email = snapshot.getValue(String.class);
 
                     // Proceed to authenticate with email and password
-                    FirebaseAuth auth = FirebaseAuth.getInstance();
-                    auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Login successful
                             Toast.makeText(Login.this, "Login successful!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(Login.this, home.class);
+                            Intent intent = new Intent(Login.this, HomePage.class);
                             startActivity(intent);
                         } else {
                             // Login failed
@@ -152,9 +153,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle database errors
-                Toast.makeText(Login.this, "Database error. Please try again later.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Error during login. Please try again.", Toast.LENGTH_LONG).show();
             }
         });
     }
+
 
 }

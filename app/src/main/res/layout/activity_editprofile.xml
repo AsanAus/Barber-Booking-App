@@ -63,7 +63,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="Hassan Firdaus"
+        android:hint="new username"
         android:inputType="text"
         android:paddingStart="10dp"
         android:textSize="12sp"
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="2dp"
         android:fontFamily="@font/inter"
         android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,10 +86,10 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="hassanfirdaus00@gmail.com"
+        android:hint="newEmail@gmail.com"
         android:inputType="text"
         android:paddingStart="10dp"
         android:textSize="12sp"
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="2dp"
         android:fontFamily="@font/inter"
         android:text="Phone Number"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,10 +112,10 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="*********"
+        android:hint="000-0000000"
         android:inputType="text"
         android:paddingStart="10dp"
         android:textSize="12sp"
@@ -123,22 +123,22 @@
         app:layout_constraintTop_toBottomOf="@+id/TVphoneNumber" />
 
     <TextView
-        android:id="@+id/TVpassword"
+        android:id="@+id/TVCurrentpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="2dp"
         android:fontFamily="@font/inter"
-        android:text="Password"
+        android:text="Current Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ETphoneNumber" />
 
     <EditText
-        android:id="@+id/ETuserPassword"
+        android:id="@+id/ETCurrentPassword"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="58dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
         android:hint="*********"
@@ -146,20 +146,47 @@
         android:paddingStart="10dp"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TVpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/TVCurrentpassword" />
+
+
+    <TextView
+        android:id="@+id/TVNewpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/inter"
+        android:text="New Password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ETCurrentPassword" />
+
+    <EditText
+        android:id="@+id/ETNewPassword"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/edittext_background"
+        android:ems="10"
+        android:hint="*********"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVNewpassword" />
 
     <Button
         android:id="@+id/BTNsaveChanges"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/editprofilebutton"
         android:text="save changes"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ETuserPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/ETNewPassword" />
 
     <TextView
         android:id="@+id/TVBacktoMyProfilePage"
