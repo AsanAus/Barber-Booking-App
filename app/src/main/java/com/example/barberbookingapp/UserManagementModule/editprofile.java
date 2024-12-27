@@ -50,7 +50,7 @@ public class editprofile extends AppCompatActivity {
     private FirebaseStorage mStorage;
     private StorageReference mStorageRef;
 
-    private EditText etUsername, etEmail, etPhoneNumber,etCurrentPassword, etNewPassword;
+    private EditText etUsername, etEmail, etPhoneNumber,etPassword;
     private ImageView ivUploadPicture;
     private Button btnSaveChanges;
     private Uri profileImageUri;  // URI for the selected image
@@ -72,14 +72,12 @@ public class editprofile extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-       // mStorage = FirebaseStorage.getInstance();
-      //  mStorageRef = mStorage.getReference();
+
 
         etUsername = findViewById(R.id.ETUsername);
         etEmail = findViewById(R.id.ETEmail);
         etPhoneNumber = findViewById(R.id.ETphoneNumber);
-        etCurrentPassword = findViewById(R.id.ETCurrentPassword); // Current password field
-        etNewPassword = findViewById(R.id.ETNewPassword); // New password field
+        etPassword =findViewById(R.id.ETNewPassword);
         ivUploadPicture = findViewById(R.id.IVUploadPicture);
         btnSaveChanges = findViewById(R.id.BTNsaveChanges);
 
@@ -117,100 +115,88 @@ public class editprofile extends AppCompatActivity {
 
 
     // Update user profile in Firebase
-    // Update user profile in Firebase
     private void updateUserProfile() {
         String username = etUsername.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String phoneNumber = etPhoneNumber.getText().toString().trim();
-        String currentPassword = etCurrentPassword.getText().toString().trim();
-        String newPassword = etNewPassword.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String role = "user";
 
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(currentPassword) || TextUtils.isEmpty(newPassword)) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Get the current user ID from Firebase Authentication
         String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if (currentUser == null) {
-            Toast.makeText(this, "No user is currently logged in", Toast.LENGTH_SHORT).show();
-            return;
+        // Check if an image was selected and encode it to Base64
+        if (profileImageUri != null) {
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), profileImageUri);
+                encodedImage = encodeToBase64(bitmap); // Use class-level encodedImage
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Error encoding image", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
-        // Re-authenticate the user with the current password
-        AuthCredential credential = EmailAuthProvider.getCredential(currentUser.getEmail(), currentPassword);
+        // Create a UserProfile object with the encoded image
+        UserProfile userProfile = new UserProfile(username, email, password, role, phoneNumber, encodedImage);
 
-        currentUser.reauthenticate(credential).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                // If re-authentication is successful, update the email (username) and password
-                currentUser.updateEmail(email).addOnCompleteListener(emailUpdateTask -> {
-                    if (emailUpdateTask.isSuccessful()) {
-                        // If email update is successful, update the password
-                        currentUser.updatePassword(newPassword).addOnCompleteListener(passwordUpdateTask -> {
-                            if (passwordUpdateTask.isSuccessful()) {
-                                Toast.makeText(editprofile.this, "Password updated successfully!", Toast.LENGTH_SHORT).show();
+        // Update user profile in Firebase Realtime Database
+        mDatabase.getReference("Users").child(userId).setValue(userProfile)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // After successfully updating the user profile, update the username in the Usernames node
+                        DatabaseReference usernameReference = FirebaseDatabase.getInstance().getReference("Usernames");
 
-                                // Now update the user profile in the database
-                                DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
-                                usersReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.exists()) {
-                                            // Retrieve old username from the user's profile
-                                            String oldUsername = snapshot.child("username").getValue(String.class);
+                        // Remove the old username from the Usernames node (if it exists)
+                        usernameReference.orderByValue().equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot usernameSnapshot : snapshot.getChildren()) {
+                                    usernameSnapshot.getRef().removeValue();  // Remove the old username
+                                }
 
-                                            // Now update the user profile with the new details
-                                            if (profileImageUri != null) {
-                                                try {
-                                                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), profileImageUri);
-                                                    encodedImage = encodeToBase64(bitmap); // Use class-level encodedImage
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                    Toast.makeText(editprofile.this, "Error encoding image", Toast.LENGTH_SHORT).show();
-                                                    return;
-                                                }
-                                            }else {
-                                                encodedImage = null; // If no image was selected, set encodedImage to null
-                                            }
-
-                                            // Create the updated UserProfile object
-                                            UserProfile userProfile = new UserProfile(username, email, newPassword, "user", phoneNumber, encodedImage);
-
-                                            // Update user profile in Firebase Realtime Database
-                                            usersReference.setValue(userProfile).addOnCompleteListener(task1 -> {
-                                                if (task1.isSuccessful()) {
-                                                    // Optionally, log out after updating the profile
-                                                    mAuth.signOut();
-                                                    Intent intent = new Intent(editprofile.this, Login.class);
-                                                    startActivity(intent);
-                                                    finish(); // Close the current activity
+                                // Add the new username to the Usernames node
+                                usernameReference.child(username).setValue(email)
+                                        .addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()) {
+                                                // Optionally, update password if changed
+                                                if (!password.isEmpty()) {
+                                                    mAuth.getCurrentUser().updatePassword(password)
+                                                            .addOnCompleteListener(task2 -> {
+                                                                if (task2.isSuccessful()) {
+                                                                    Toast.makeText(editprofile.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                                                                    Intent intent = new Intent(editprofile.this, myprofile.class);
+                                                                    startActivity(intent);
+                                                                } else {
+                                                                    Toast.makeText(editprofile.this, "Error updating password", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
                                                 } else {
-                                                    Toast.makeText(editprofile.this, "Error updating profile", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(editprofile.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
                                                 }
-                                            });
-                                        }
-                                    }
+                                            } else {
+                                                Toast.makeText(editprofile.this, "Error updating username", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Toast.makeText(editprofile.this, "Error fetching old username", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(editprofile.this, "Error updating password", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                // Handle any database errors
+                                Toast.makeText(editprofile.this, "Error updating username", Toast.LENGTH_SHORT).show();
                             }
                         });
                     } else {
-                        Toast.makeText(editprofile.this, "Error updating email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(editprofile.this, "Error updating profile", Toast.LENGTH_SHORT).show();
                     }
                 });
-            } else {
-                Toast.makeText(editprofile.this, "Re-authentication failed. Please check your current password.", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
+
 
 
 
