@@ -24,7 +24,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.UserManagementModule.HomePage;
-import com.bumptech.glide.Glide;
+
 import com.example.barberbookingapp.UserManagementModule.home;
 import com.example.barberbookingapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -219,8 +219,11 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Login successful
                             Toast.makeText(Login.this, "Login successful!", Toast.LENGTH_LONG).show();
+                            // Redirect to HomePage
                             Intent intent = new Intent(Login.this, HomePage.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Prevent back navigation
                             startActivity(intent);
+
                         } else {
                             // Login failed
                             Toast.makeText(Login.this, "Invalid username or password. Please try again.", Toast.LENGTH_LONG).show();

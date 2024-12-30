@@ -37,6 +37,24 @@
             android:name=".GeneralModule.Splashing"
             android:exported="true" />
         <activity
+            android:name=".UserManagementModule.HomePage"
+            android:exported="false"/>
+        <activity
+            android:name=".UserManagementModule.myprofile"
+            android:exported="false"/>
+        <activity
+            android:name=".UserManagementModule.editprofile"
+            android:exported="false"/>
+        <activity
+            android:name=".UserManagementModule.upcoming_booking"
+            android:exported="false"/>
+        <activity
+            android:name=".UserManagementModule.cancelled_booking"
+            android:exported="false"/>
+        <activity
+            android:name=".aboutapp"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
