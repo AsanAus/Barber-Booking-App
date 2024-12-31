@@ -9,19 +9,17 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.content.Intent;
-import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Button;
 
 
 import com.example.barberbookingapp.R;
-import com.example.barberbookingapp.aboutapp;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class HomePage extends AppCompatActivity {
@@ -60,12 +58,18 @@ public class HomePage extends AppCompatActivity {
                   //  startActivity(new Intent(HomePage.this, BookingActivity.class));
                     return true;
                 } else if (item.getItemId() == R.id.DestAboutApp) {
-                    startActivity(new Intent(HomePage.this, aboutapp.class));
+                    startActivity(new Intent(HomePage.this, AboutApp.class));
                     return true;
                 } else {
                     return false;
                 }
             }
+        });
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
         });
     }
 
@@ -85,7 +89,6 @@ public class HomePage extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 

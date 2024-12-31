@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/aboutappbackground"
-    tools:context=".aboutapp">
+    tools:context=".UserManagementModule.AboutApp">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -39,7 +39,7 @@
         android:layout_height="323dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="116dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="15dp"
         app:cardElevation="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -54,6 +54,7 @@
             android:fontFamily="@font/inter_medium"
             android:text="Say goodbye to long waits and scheduling headaches with our barber shop booking app! Discover top-rated barber shops near you, explore services, and book your appointment instantly. Customize your experience with features like preferred barber selection, service history tracking, and style inspiration galleries. Get notified about your upcoming appointments. Whether it’s a quick trim or a fresh new look, your perfect barber experience is just a few taps away!"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="15sp" />
     </androidx.cardview.widget.CardView>
 

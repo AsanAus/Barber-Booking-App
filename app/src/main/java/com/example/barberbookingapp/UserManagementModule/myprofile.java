@@ -42,7 +42,6 @@ public class myprofile extends AppCompatActivity {
     private ImageView ivMyProfilePicture;
     private TextView tvUsername, tvEmail;
     private Button btnLogout;
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 

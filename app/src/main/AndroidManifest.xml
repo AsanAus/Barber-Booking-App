@@ -16,9 +16,6 @@
             android:name=".BarberManagementModule.BarberHome"
             android:exported="false" />
         <activity
-            android:name=".UserManagementModule.home"
-            android:exported="false" />
-        <activity
             android:name=".GeneralModule.BarberLogin"
             android:exported="false" />
         <activity
@@ -52,7 +49,7 @@
             android:name=".UserManagementModule.cancelled_booking"
             android:exported="false"/>
         <activity
-            android:name=".aboutapp"
+            android:name=".UserManagementModule.AboutApp"
             android:exported="false"/>
         <activity
             android:name=".MainActivity"

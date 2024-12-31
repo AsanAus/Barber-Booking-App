@@ -11,9 +11,9 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="410dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/toolbaredit"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,60 +21,6 @@
         app:menu="@menu/toolbar_menu"
         app:title="Welcome"
         app:titleMarginStart="155dp" />
-
-
-    <TextView
-        android:id="@+id/TVmainTittle"
-        android:layout_width="270dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Your Barber, Your Schedule"
-        android:textAlignment="center"
-        android:textColor="#020202"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-
-    <TextView
-        android:id="@+id/TVsubTittle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Barber Booking App"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TVmainTittle" />
-
-    <Button
-        android:id="@+id/BTNappointment"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="132dp"
-        android:background="@drawable/btngg"
-        android:fontFamily="@font/montserrat"
-        android:text="Appointments"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TVsubTittle" />
-
-    <Button
-        android:id="@+id/BTNbarbers"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/btngg"
-        android:fontFamily="@font/montserrat"
-        android:text="Barbers"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BTNappointment" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -87,6 +33,61 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
+    <TextView
+        android:id="@+id/TVmainTittle"
+        android:layout_width="270dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Your Barber, Your Schedule"
+        android:textAlignment="center"
+        android:textColor="#020202"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/TVsubTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Barber Booking App"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVmainTittle" />
+
+    <Button
+        android:id="@+id/BTNappointment"
+        android:layout_width="296dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="132dp"
+        android:background="@drawable/btngg"
+        android:fontFamily="@font/montserrat"
+        android:text="Appointments"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVsubTittle" />
+
+    <Button
+        android:id="@+id/BTNbarbers"
+        android:layout_width="296dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/btngg"
+        android:fontFamily="@font/montserrat"
+        android:text="Barbers"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BTNappointment" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
