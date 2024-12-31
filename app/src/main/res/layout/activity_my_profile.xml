@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundmyprofile"
-    tools:context=".UserManagementModule.myprofile">
+    tools:context=".UserManagementModule.MyProfile">
 
     <TextView
         android:id="@+id/TVMyProfile"
@@ -39,10 +39,10 @@
         android:id="@+id/TVusername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/inter_bold"
-        android:text="Hassan Firdaus"
+        android:hint="Loading..."
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -56,7 +56,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/inter"
-        android:text="hassanfirdaus00@gmail.com"
+        android:hint="Loading...."
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVusername" />
@@ -68,9 +68,11 @@
         android:layout_marginStart="135dp"
         android:layout_marginTop="48dp"
         android:background="@drawable/editprofilebutton"
+        android:padding="15dp"
         android:drawableStart="@drawable/smallusericon"
         android:fontFamily="@font/inter"
-        android:text="  Edit Profile"
+        android:text="Edit Profile"
+        android:textAllCaps="false"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,10 +84,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="135dp"
         android:layout_marginTop="16dp"
+        android:padding="15dp"
         android:background="@drawable/logoutbutton"
         android:drawableStart="@drawable/logouticon"
         android:fontFamily="@font/inter"
-        android:text="  Log Out"
+        android:text="Log Out"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BTNeditprofile" />

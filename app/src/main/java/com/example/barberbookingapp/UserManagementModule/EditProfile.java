@@ -5,12 +5,11 @@ package com.example.barberbookingapp.UserManagementModule;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,10 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.barberbookingapp.GeneralModule.Login;
 import com.example.barberbookingapp.R;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,17 +34,10 @@ import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 
-
-import java.util.Objects;
-import java.util.UUID;
-
-
-public class editprofile extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
-    private FirebaseStorage mStorage;
-    private StorageReference mStorageRef;
 
     private EditText etUsername, etEmail, etPhoneNumber,etPassword;
     private ImageView ivUploadPicture;
@@ -56,16 +45,17 @@ public class editprofile extends AppCompatActivity {
     private Uri profileImageUri;  // URI for the selected image
     private String encodedImage; // Base64 encoded image string (class-level variable)
 
+    public String username, email, password, role, phoneNumber, profilePicture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editprofile);
+        setContentView(R.layout.activity_edit_profile);
 
-
-        // Back button functionality
+        // Back button
         TextView backToHome = findViewById(R.id.TVBacktoMyProfilePage);
         backToHome.setOnClickListener(v -> {
-            Intent intent = new Intent(editprofile.this, myprofile.class);
+            Intent intent = new Intent(EditProfile.this, MyProfile.class);
             startActivity(intent);
             finish();
         });
@@ -81,13 +71,57 @@ public class editprofile extends AppCompatActivity {
         ivUploadPicture = findViewById(R.id.IVUploadPicture);
         btnSaveChanges = findViewById(R.id.BTNsaveChanges);
 
-        // Click listener for the image upload button
+        // Fetch and display user data
+        fetchUserProfile();
+
+        // image upload button
         ivUploadPicture.setOnClickListener(v -> openImageChooser());
 
-        // Click listener for the Save Changes button
+        // Save Changes button
         btnSaveChanges.setOnClickListener(v -> updateUserProfile());
 
+
     }
+
+    private void fetchUserProfile() {
+        String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+        // Reference to the user's node in the database
+        DatabaseReference userRef = mDatabase.getReference("Users").child(userId);
+
+        // Listen for data at the user's node
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Get UserProfile object from snapshot
+                    UserProfile userProfile = snapshot.getValue(UserProfile.class);
+                    if (userProfile != null) {
+                        // Populate the UI elements
+                        etUsername.setText(userProfile.username);
+                        etEmail.setText(userProfile.email);
+                        etPhoneNumber.setText(userProfile.phoneNumber);
+
+                        // If the profile picture exists, load it into the ImageView
+                        if (userProfile.profilePicture != null) {
+                            // Convert Base64 string back to Bitmap and display in ImageView
+                            Bitmap profileBitmap = decodeBase64(userProfile.profilePicture);
+                            ivUploadPicture.setImageBitmap(profileBitmap);
+                        }
+
+                    }
+                } else {
+                    Toast.makeText(EditProfile.this, "User data not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(EditProfile.this, "Failed to load profile: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     // Open image chooser for selecting a profile picture
     private void openImageChooser() {
@@ -113,14 +147,13 @@ public class editprofile extends AppCompatActivity {
         }
     }
 
-
     // Update user profile in Firebase
     private void updateUserProfile() {
         String username = etUsername.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String phoneNumber = etPhoneNumber.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
-        String role = "user";
+
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -169,18 +202,18 @@ public class editprofile extends AppCompatActivity {
                                                     mAuth.getCurrentUser().updatePassword(password)
                                                             .addOnCompleteListener(task2 -> {
                                                                 if (task2.isSuccessful()) {
-                                                                    Toast.makeText(editprofile.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
-                                                                    Intent intent = new Intent(editprofile.this, myprofile.class);
+                                                                    Toast.makeText(EditProfile.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                                                                    Intent intent = new Intent(EditProfile.this, MyProfile.class);
                                                                     startActivity(intent);
                                                                 } else {
-                                                                    Toast.makeText(editprofile.this, "Error updating password", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(EditProfile.this, "Error updating password", Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
                                                 } else {
-                                                    Toast.makeText(editprofile.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(EditProfile.this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
                                                 }
                                             } else {
-                                                Toast.makeText(editprofile.this, "Error updating username", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(EditProfile.this, "Error updating username", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
@@ -188,20 +221,14 @@ public class editprofile extends AppCompatActivity {
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                                 // Handle any database errors
-                                Toast.makeText(editprofile.this, "Error updating username", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfile.this, "Error updating username", Toast.LENGTH_SHORT).show();
                             }
                         });
                     } else {
-                        Toast.makeText(editprofile.this, "Error updating profile", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfile.this, "Error updating profile", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
-
-
-
-
-
 
     // Encode image to Base64
     private String encodeToBase64(Bitmap image) {
@@ -211,15 +238,15 @@ public class editprofile extends AppCompatActivity {
         return android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT);
     }
 
+    private Bitmap decodeBase64(String encodedImage) {
+        byte[] decodedBytes = android.util.Base64.decode(encodedImage, android.util.Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
+
     // User profile model
     public static class UserProfile {
-        public String username;
-        public String email;
-        public String password;
-        public String role;
-        public String phoneNumber;
-        public String profilePicture; // Base64 encoded image string
 
+        public String username, email, password, role, phoneNumber, profilePicture;
         public UserProfile(String username, String email,String password,String role, String phoneNumber, String profilePicture) {
             this.username = username;
             this.email = email;
@@ -227,7 +254,8 @@ public class editprofile extends AppCompatActivity {
             this.role = role;
             this.phoneNumber = phoneNumber;
             this.profilePicture = profilePicture;;
-
+        }
+        public UserProfile(){
 
         }
 

@@ -7,21 +7,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.MenuItem;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.GeneralModule.Login;
 import com.example.barberbookingapp.R;
@@ -35,9 +28,8 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.time.Instant;
 
-public class myprofile extends AppCompatActivity {
+public class MyProfile extends AppCompatActivity {
 
     private ImageView ivMyProfilePicture;
     private TextView tvUsername, tvEmail;
@@ -45,13 +37,15 @@ public class myprofile extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+//    private String fullname, email;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Initialize Fresco
         Fresco.initialize(this);
-        setContentView(R.layout.activity_myprofile);
+        setContentView(R.layout.activity_my_profile);
 
         // Find the TextView by its ID
         TextView backToHome = findViewById(R.id.TVbacktoHomePage);//For Back button return to previous page which is(HomePage)
@@ -59,7 +53,7 @@ public class myprofile extends AppCompatActivity {
         backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(myprofile.this, HomePage.class);
+                Intent intent = new Intent(MyProfile.this, HomePage.class);
                 startActivity(intent);
                 finish(); // Optional: Close the current activity
             }
@@ -69,7 +63,7 @@ public class myprofile extends AppCompatActivity {
       editProfileButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              Intent intent1 = new Intent(myprofile.this , editprofile.class);
+              Intent intent1 = new Intent(MyProfile.this , EditProfile.class);
               startActivity(intent1);
               finish();
           }
@@ -83,6 +77,15 @@ public class myprofile extends AppCompatActivity {
 
       //Initialize Firebase Auth and Database Reference
         mAuth = FirebaseAuth.getInstance();
+
+//        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+//        if(firebaseUser == null){
+//            Toast.makeText(MyProfile.this, "Something went wrong!", Toast.LENGTH_LONG).show();
+//        } else {
+//            showUserProfile(firebaseUser);
+//        }
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +99,31 @@ public class myprofile extends AppCompatActivity {
         loadUserProfile();
 
     }
+
+//    private void showUserProfile(FirebaseUser firebaseUser) {
+//        String userID = firebaseUser.getUid();
+//
+//        //Extracting User Reference from Database for "Registered Users"
+//        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users");
+//        referenceProfile.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                HelperClass readUserDetails = snapshot.getValue(HelperClass.class);
+//                if(readUserDetails != null){
+//                    fullname = firebaseUser.getDisplayName();
+//                    email = firebaseUser.getEmail();
+//
+//                    tvUsername.setText(fullname);
+//                    tvEmail.setText(email);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
     private void showLogOutConfirmation() {
         // Create an AlertDialog for log out confirmation
@@ -117,7 +145,7 @@ public class myprofile extends AppCompatActivity {
         mAuth.signOut();
 
         // Redirect to Login Activity
-        Intent intent = new Intent(myprofile.this, Login.class);
+        Intent intent = new Intent(MyProfile.this, Login.class);
         startActivity(intent);
         finish();  // Close the current activity
     }
@@ -183,6 +211,5 @@ public class myprofile extends AppCompatActivity {
         }
 
     }
-
 
 }
