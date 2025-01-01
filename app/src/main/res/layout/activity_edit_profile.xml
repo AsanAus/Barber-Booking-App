@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundmyprofile"
-    tools:context=".UserManagementModule.editprofile">
+    tools:context=".UserManagementModule.EditProfile">
 
 
     <TextView
@@ -52,18 +52,19 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/inter"
         android:text="Username"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/IVUploadPicture" />
 
     <EditText
         android:id="@+id/ETUsername"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="58dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="new username"
+        android:hint="Loading..."
         android:inputType="text"
         android:paddingStart="10dp"
         android:textSize="12sp"
@@ -78,18 +79,19 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/inter"
         android:text="Email"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ETUsername" />
 
     <EditText
         android:id="@+id/ETEmail"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="58dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="newEmail@gmail.com"
+        android:hint="Loading...."
         android:inputType="text"
         android:paddingStart="10dp"
         android:textSize="12sp"
@@ -104,18 +106,19 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/inter"
         android:text="Phone Number"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ETEmail" />
 
     <EditText
         android:id="@+id/ETphoneNumber"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="58dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="000-0000000"
+        android:hint="enter your phone number"
         android:inputType="text"
         android:paddingStart="10dp"
         android:textSize="12sp"
@@ -130,20 +133,21 @@
         android:layout_marginStart="58dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/inter"
-        android:text="New Password"
+        android:text="Enter Password"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ETphoneNumber" />
 
     <EditText
         android:id="@+id/ETNewPassword"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="58dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/edittext_background"
         android:ems="10"
-        android:hint="*********"
-        android:inputType="text"
+        android:hint="enter password to save changes"
+        android:inputType="textPassword"
         android:paddingStart="10dp"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,10 +157,11 @@
         android:id="@+id/BTNsaveChanges"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/editprofilebutton"
         android:text="save changes"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"

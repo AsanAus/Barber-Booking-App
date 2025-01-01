@@ -83,7 +83,7 @@ public class upcoming_booking extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.userProfileIcon) {
             // Redirect to MyProfileActivity
-            Intent intent = new Intent(this, myprofile.class);
+            Intent intent = new Intent(this, MyProfile.class);
             startActivity(intent);
             return true;
         }

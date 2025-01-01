@@ -1,4 +1,4 @@
-package com.example.barberbookingapp;
+package com.example.barberbookingapp.UserManagementModule;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,22 +9,17 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.barberbookingapp.UserManagementModule.HomePage;
-import com.example.barberbookingapp.UserManagementModule.editprofile;
-import com.example.barberbookingapp.UserManagementModule.myprofile;
+import com.example.barberbookingapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class aboutapp extends AppCompatActivity {
+public class AboutApp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_aboutapp);
+        setContentView(R.layout.activity_about_app);
 
         // assigning ID of the toolbar to a variable
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -35,7 +30,7 @@ public class aboutapp extends AppCompatActivity {
         // Back button functionality
         TextView backToHome = findViewById(R.id.TVbacktoHomePage);
         backToHome.setOnClickListener(v -> {
-            Intent intent = new Intent(aboutapp.this, HomePage.class);
+            Intent intent = new Intent(AboutApp.this, HomePage.class);
             startActivity(intent);
             finish();
         });
@@ -47,13 +42,13 @@ public class aboutapp extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.Desthome) {
-                    startActivity(new Intent(aboutapp.this, HomePage.class));
+                    startActivity(new Intent(AboutApp.this, HomePage.class));
                     return true;
                 } else if (item.getItemId() == R.id.DestBooking) {
                     //  startActivity(new Intent(HomePage.this, BookingActivity.class));
                     return true;
                 } else if (item.getItemId() == R.id.DestAboutApp) {
-                    startActivity(new Intent(aboutapp.this, aboutapp.class));
+                    startActivity(new Intent(AboutApp.this, AboutApp.class));
                     return true;
                 } else {
                     return false;
@@ -67,7 +62,7 @@ public class aboutapp extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.userProfileIcon) {
             // Redirect to MyProfileActivity
-            Intent intent = new Intent(aboutapp.this, myprofile.class);
+            Intent intent = new Intent(AboutApp.this, MyProfile.class);
             startActivity(intent);
             return true;
         }
