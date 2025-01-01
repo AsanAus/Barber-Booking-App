@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
+    android:layout_height="200dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="#F7F7FF"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="35dp"
+        android:layout_marginLeft="55dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="No appointments found"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="80dp"
+        android:layout_marginLeft="0dp"
+        android:text="You don’t have any upcoming barber appointments. Please book the appointment"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:layout_marginVertical="130dp"
+        android:layout_marginLeft="80dp"
+        android:background="@drawable/bookingbuttonedit"
+        android:text="Book Now"
+        android:textColor="@color/white" />
+</androidx.cardview.widget.CardView>

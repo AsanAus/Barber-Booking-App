@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/toolbaredit"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="@font/inter_medium"
         android:text="Back"
         android:textColor="#000000"
@@ -75,10 +75,11 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
         android:layout_width="407dp"
         android:layout_height="552dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="49dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVcompleted" />
 

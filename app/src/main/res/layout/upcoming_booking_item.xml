@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
+    android:layout_height="200dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    android:clickable="true">
+
+
+    <ImageView
+        android:id="@+id/IVBarberProfilePicture"
+        android:layout_margin="20dp"
+        android:layout_width="141dp"
+        android:layout_height="115dp"
+        android:background="@drawable/usericon"
+
+        />
+
+    <TextView
+        android:id="@+id/TVbarberName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
+        android:layout_marginLeft="200dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="San Aus"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/IVdateOfBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="55dp"
+        android:layout_marginLeft="195dp"
+        app:srcCompat="@drawable/baseline_calendar_month_24" />
+
+    <TextView
+        android:id="@+id/TVdateOfBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="55dp"
+        android:layout_marginLeft="230dp"
+        android:fontFamily="@font/inter"
+        android:text="SUN 6 Dec"
+        android:textAlignment="textStart"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/IVtimeOfBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="85dp"
+        android:layout_marginLeft="195dp"
+        app:srcCompat="@drawable/baseline_access_time_filled_24" />
+
+    <TextView
+        android:id="@+id/TVtimeOfBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="85dp"
+        android:layout_marginLeft="230dp"
+        android:fontFamily="@font/inter"
+        android:text="10.00PM"
+        android:textAlignment="textStart"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginVertical="114dp"
+        android:layout_marginLeft="195dp"
+        app:srcCompat="@drawable/iconslocation" />
+
+    <TextView
+        android:id="@+id/TVlocationOfBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginVertical="114dp"
+        android:layout_marginLeft="230dp"
+        android:fontFamily="@font/inter"
+        android:text="Subang Jaya"
+        android:textAlignment="textStart"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/BTNcancelBooking"
+        android:layout_width="150dp"
+        android:layout_height="29dp"
+        android:layout_marginVertical="160dp"
+        android:layout_marginLeft="120dp"
+        android:background="@drawable/bookingbuttonedit"
+        android:fontFamily="@font/inter_bold"
+        android:text="Cancel Booking"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+
+</androidx.cardview.widget.CardView>
