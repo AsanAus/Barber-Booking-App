@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Appointment2DateAndTimeDateYearTV"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".Booking">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/BarbersHeader"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#EBEBFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/BarberListTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barbers"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp"
+        android:background="#f5f5ff"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Barber2CardView"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    android:layout_marginStart="43dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/Barber1CardView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ExtraText">
+
+                    <ImageView
+                        android:id="@+id/Barber2ImageView"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center|top"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circle_shape"
+                        android:clipToOutline="true"
+                        android:foregroundGravity="top"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/img_2" />
+
+                    <TextView
+                        android:id="@+id/Barber2NameTV"
+                        android:textColor="@color/black"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="43dp"
+                        android:layout_marginTop="90dp"
+                        android:text="Ku Ku Bird"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/Barber2LocationTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="49dp"
+                        android:layout_marginTop="110dp"
+                        android:textColor="@color/black"
+
+                        android:text="Petaling Jaya"
+                        android:textSize="10dp" />
+
+                    <RatingBar
+                        android:id="@+id/Barber2RatingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="36dp"
+                        android:layout_marginTop="122dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:max="100"
+                        android:numStars="5"
+                        android:progressTint="#EFD41D"
+                        android:rating="5.0"
+                        android:stepSize="0.0" />
+
+                    <Button
+                        android:id="@+id/Barber2SelectBtn"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginTop="134dp"
+                        android:minWidth="150dp"
+                        android:text="Select"
+                        android:textSize="8dp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Barber1CardView"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ExtraText">
+
+                    <ImageView
+                        android:id="@+id/Barber1ImageView"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center|top"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circle_shape"
+                        android:clipToOutline="true"
+                        android:foregroundGravity="top"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/img" />
+
+                    <TextView
+                        android:id="@+id/Barber1NameTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="48dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="90dp"
+                        android:text="San Aus"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/Barber1LocationTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="49dp"
+                        android:textColor="@color/black"
+
+                        android:layout_marginTop="110dp"
+                        android:text="Subang Jaya"
+                        android:textSize="10dp" />
+
+                    <RatingBar
+                        android:id="@+id/Barber1RatingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="36dp"
+                        android:layout_marginTop="122dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:max="100"
+                        android:numStars="5"
+                        android:progressTint="#EFD41D"
+                        android:rating="5.0"
+                        android:stepSize="0.0" />
+
+                    <Button
+                        android:id="@+id/Barber1SelectBtn"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginTop="134dp"
+                        android:minWidth="150dp"
+                        android:text="Select"
+                        android:textSize="8dp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Barber4CardView"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="43dp"
+                    android:layout_marginTop="234dp"
+                    android:layout_marginEnd="24dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/Barber3CardView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ExtraText">
+
+                    <ImageView
+                        android:id="@+id/Barber4ImageView"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center|top"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circle_shape"
+                        android:clipToOutline="true"
+                        android:foregroundGravity="top"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/img_4" />
+
+                    <TextView
+                        android:id="@+id/Barber4NameTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="48dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="90dp"
+                        android:text="Nadhea"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/Barber4LocationTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="56dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="110dp"
+                        android:text="Puchong"
+                        android:textSize="10dp" />
+
+                    <RatingBar
+                        android:id="@+id/Barber4RatingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="122dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:max="100"
+                        android:numStars="5"
+                        android:progressTint="#EFD41D"
+                        android:rating="5.0"
+                        android:stepSize="0.0" />
+
+                    <Button
+                        android:id="@+id/Barber4SelectBtn"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginTop="134dp"
+                        android:minWidth="150dp"
+                        android:text="Select"
+                        android:textSize="8dp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Barber3CardView"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="24dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    android:layout_marginTop="234dp"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ExtraText">
+
+                    <ImageView
+                        android:id="@+id/Barber3ImageView"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center|top"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circle_shape"
+                        android:clipToOutline="true"
+                        android:foregroundGravity="top"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/img_1" />
+
+                    <TextView
+                        android:id="@+id/Barber3NameTV"
+                        android:textColor="@color/black"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="90dp"
+                        android:text="Ernest Chean"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/Barber3LocationTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="110dp"
+                        android:text="Bangsar"
+                        android:textSize="10dp"/>
+
+                    <RatingBar
+                        android:id="@+id/Barber3RatingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="36dp"
+                        android:layout_marginTop="122dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:max="100"
+                        android:numStars="5"
+                        android:progressTint="#EFD41D"
+                        android:rating="5.0"
+                        android:stepSize="0.0" />
+
+                    <Button
+                        android:id="@+id/Barber3SelectBtn"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginTop="134dp"
+                        android:minWidth="150dp"
+                        android:text="Select"
+                        android:textSize="8dp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/Barber5CardView"
+                    android:layout_width="160dp"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="440dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ExtraText">
+
+                    <ImageView
+                        android:id="@+id/Barber5ImageView"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center|top"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circle_shape"
+                        android:clipToOutline="true"
+                        android:foregroundGravity="top"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/img_3" />
+
+                    <TextView
+                        android:id="@+id/Barber5NameTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="90dp"
+                        android:textColor="@color/black"
+                        android:text="Sarah"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/Barber5LocationTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="58dp"
+                        android:layout_marginTop="110dp"
+                        android:text="Kepong"
+                        android:textColor="@color/black"
+                        android:textSize="10dp"/>
+
+                    <RatingBar
+                        android:id="@+id/Barber5RatingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="36dp"
+                        android:layout_marginTop="122dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:max="100"
+                        android:numStars="5"
+                        android:progressTint="#EFD41D"
+                        android:rating="5.0"
+                        android:stepSize="0.0" />
+
+                    <Button
+                        android:id="@+id/Barber5SelectBtn"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginTop="134dp"
+                        android:minWidth="150dp"
+                        android:text="Select"
+                        android:textSize="8dp" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

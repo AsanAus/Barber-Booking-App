@@ -52,24 +52,26 @@ public class lastConfirm extends AppCompatActivity {
         lastconfirm = findViewById(R.id.lastConfirmBtn);
 
         // Retrieve data passed from the previous activity (date_and_time)
+        String barberID = getIntent().getStringExtra("barberID");
         String barberName = getIntent().getStringExtra("barberName");
         String barberLocation = getIntent().getStringExtra("barberLocation");
         String serviceName = getIntent().getStringExtra("serviceName");
-        String servicePrice = getIntent().getStringExtra("servicePrice");
+        String servicesPrices = getIntent().getStringExtra("servicesPrices");
         String selectedDate = getIntent().getStringExtra("selectedDate");
         String selectedTime = getIntent().getStringExtra("selectedTime");
+
+        // Process the price
+        String totalPrice = calculateTotalPrice(servicesPrices);
 
         // Display data in TextViews
         BarberNameTV.setText(barberName);
         BarberLocationTV.setText(barberLocation);
         ServiceNameTV.setText(serviceName);
-        ServicePriceTV.setText(servicePrice);
+        ServicePriceTV.setText(totalPrice); // Display the processed price
         DateAndTimeTimeDayTV.setText(selectedTime); // Show the selected time
         DateAndTimeDateYearTV.setText(selectedDate); // Show the selected date
 
-        BarberEditBtn.findViewById(R.id.Appointment2BarberEditBtn);
-        ServiceEditBtn.findViewById(R.id.Appointment2ServiceEditBtn);
-        DateAndTimeEditBtn.findViewById(R.id.Appointment2DateAndTimeEditBtn);
+
 
         BarberEditBtn.setOnClickListener(v -> {
             Intent intent = new Intent(lastConfirm.this, Booking.class);
@@ -89,14 +91,14 @@ public class lastConfirm extends AppCompatActivity {
         // Handle the confirmation button click
         lastconfirm.setOnClickListener(v -> {
             // Write data to Firebase when Last Confirm button is clicked
-            writeToFirebase(barberName, barberLocation, serviceName, servicePrice, selectedDate, selectedTime);
+            writeToFirebase(barberID, barberLocation, serviceName, totalPrice, selectedDate, selectedTime);
         });
     }
 
     // Method to write the appointment data to Firebase
-    private void writeToFirebase(String barberName, String barberLocation, String serviceName, String servicePrice, String date, String time) {
-        // Create a new appointment object
-        Apt appointment = new Apt(barberName, barberLocation, serviceName, servicePrice, date, time);
+    private void writeToFirebase(String barberID, String barberLocation, String serviceName, String servicePrice, String date, String time) {
+        // Create a new appointment object with status "pending"
+        Apt appointment = new Apt(barberID, barberLocation, serviceName, servicePrice, date, time, "pending");
 
         // Write the appointment to Firebase
         String appointmentId = databaseReference.push().getKey();
@@ -104,11 +106,35 @@ public class lastConfirm extends AppCompatActivity {
             databaseReference.child(appointmentId).setValue(appointment)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(lastConfirm.this, "Appointment confirmed and saved!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(lastConfirm.this, "Appointment confirmed and saved with pending status!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(lastConfirm.this, "Failed to confirm appointment.", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
+    }
+    // Method to process prices
+    private String calculateTotalPrice(String servicesPrices) {
+        if (servicesPrices == null || servicesPrices.isEmpty()) {
+            return "RM0"; // Default value if prices are not provided
+        }
+
+        String[] prices = servicesPrices.split(","); // Split by commas
+        if (prices.length == 1) {
+            return prices[0].trim(); // Return the single price
+        }
+
+        double total = 0;
+        for (String price : prices) {
+            // Extract numeric value from "RMXX" format
+            String numericValue = price.trim().replace("RM", "").trim();
+            try {
+                total += Double.parseDouble(numericValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace(); // Log error if parsing fails
+            }
+        }
+
+        return "RM" + String.format("%.2f", total); // Return total with "RM" prefix
     }
 }

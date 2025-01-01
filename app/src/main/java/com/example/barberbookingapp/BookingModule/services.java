@@ -56,6 +56,8 @@ public class services extends AppCompatActivity {
 
         // Get barberID from Intent
         String barberID = getIntent().getStringExtra("barberID");
+        String barberLocation = getIntent().getStringExtra("barberLocation");
+        String barberName = getIntent().getStringExtra("barberName");
 
         // Reference Firebase database
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Service");
@@ -107,28 +109,37 @@ public class services extends AppCompatActivity {
         // Set click listener for Confirm button
         ConfirmBtn.setOnClickListener(v -> {
             String selectedServices = "";
+            String servicesPrices ="";
 
             if (CB1.isChecked()) {
                 selectedServices += service1NameTV.getText().toString() + ", ";
+                servicesPrices += service1PriceTV.getText().toString()+", ";
             }
             if (CB2.isChecked()) {
                 selectedServices += service2NameTV.getText().toString() + ", ";
+                servicesPrices += service2PriceTV.getText().toString()+", ";
             }
             if (CB3.isChecked()) {
                 selectedServices += service3NameTV.getText().toString() + ", ";
+                servicesPrices += service3PriceTV.getText().toString()+", ";
             }
             if (CB4.isChecked()) {
                 selectedServices += service4NameTV.getText().toString() + ", ";
+                servicesPrices += service4PriceTV.getText().toString()+", ";
             }
 
             if (!selectedServices.isEmpty()) {
                 selectedServices = selectedServices.substring(0, selectedServices.length() - 2); // Remove trailing comma and space
+                servicesPrices = servicesPrices.substring(0,servicesPrices.length()-2);
                 Toast.makeText(services.this, "Services selected: " + selectedServices, Toast.LENGTH_SHORT).show();
 
                 // Navigate to date_and_time activity
                 Intent intent = new Intent(services.this, date_and_time.class);
                 intent.putExtra("barberID", barberID);
                 intent.putExtra("selectedServices", selectedServices);
+                intent.putExtra("servicesPrices",servicesPrices);
+                intent.putExtra("barberName",barberName);
+                intent.putExtra("barberLocation",barberLocation);
                 startActivity(intent);
             } else {
                 Toast.makeText(services.this, "Please select at least one service", Toast.LENGTH_SHORT).show();

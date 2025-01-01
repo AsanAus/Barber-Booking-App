@@ -54,9 +54,13 @@ public class date_and_time extends AppCompatActivity {
             selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
         });
 
-        // Set up TimePicker to capture selected time
+        // Set up TimePicker to capture selected time in 12-hour format
+        timePicker.setIs24HourView(false); // Use 12-hour format
         timePicker.setOnTimeChangedListener((view, hourOfDay, minute) -> {
-            selectedTime = String.format("%02d:%02d", hourOfDay, minute);
+            // Determine AM or PM
+            String period = (hourOfDay >= 12) ? "PM" : "AM";
+            int hour = (hourOfDay % 12 == 0) ? 12 : hourOfDay % 12; // Convert 24-hour to 12-hour format
+            selectedTime = String.format("%02d:%02d %s", hour, minute, period);
         });
 
         // Set up button click listener
@@ -76,7 +80,7 @@ public class date_and_time extends AppCompatActivity {
             String barberName = getIntent().getStringExtra("barberName");
             String barberLocation = getIntent().getStringExtra("barberLocation");
             String serviceName = getIntent().getStringExtra("selectedServices");
-            String servicePrice = getIntent().getStringExtra("servicePrice");
+            String servicesPrices = getIntent().getStringExtra("servicesPrices");
 
             // Pass data to the next activity (lastConfirm)
             Intent intent = new Intent(date_and_time.this, lastConfirm.class);
@@ -84,7 +88,7 @@ public class date_and_time extends AppCompatActivity {
             intent.putExtra("barberName", barberName);
             intent.putExtra("barberLocation", barberLocation);
             intent.putExtra("serviceName", serviceName);
-            intent.putExtra("servicePrice", servicePrice);
+            intent.putExtra("servicesPrices", servicesPrices);
             intent.putExtra("selectedDate", selectedDate);
             intent.putExtra("selectedTime", selectedTime);
 

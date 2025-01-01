@@ -91,31 +91,41 @@ public class Booking extends AppCompatActivity {
         // Set click listeners for buttons
         Barber1.setOnClickListener(v -> {
             Intent intent = new Intent(Booking.this, services.class);
-            intent.putExtra("barberID", "barber1"); // Pass the barber ID to the services activity
+            intent.putExtra("barberID", "barber1"); // Pass the barber ID
+            intent.putExtra("barberName", barber1NameTV.getText().toString()); // Pass the barber name
+            intent.putExtra("barberLocation", barber1LocationTV.getText().toString()); // Pass the barber location
             startActivityForResult(intent, 1);
         });
 
         Barber2.setOnClickListener(v -> {
             Intent intent = new Intent(Booking.this, services.class);
-            intent.putExtra("barberID", "barber2"); // Pass the barber ID to the services activity
+            intent.putExtra("barberID", "barber2"); // Pass the barber ID
+            intent.putExtra("barberName", barber2NameTV.getText().toString()); // Pass the barber name
+            intent.putExtra("barberLocation", barber2LocationTV.getText().toString()); // Pass the barber location
             startActivityForResult(intent, 1);
         });
 
         Barber3.setOnClickListener(v -> {
             Intent intent = new Intent(Booking.this, services.class);
-            intent.putExtra("barberID", "barber3"); // Pass the barber ID to the services activity
+            intent.putExtra("barberID", "barber3"); // Pass the barber ID
+            intent.putExtra("barberName", barber3NameTV.getText().toString()); // Pass the barber name
+            intent.putExtra("barberLocation", barber3LocationTV.getText().toString()); // Pass the barber location
             startActivityForResult(intent, 1);
         });
 
         Barber4.setOnClickListener(v -> {
             Intent intent = new Intent(Booking.this, services.class);
-            intent.putExtra("barberID", "barber4"); // Pass the barber ID to the services activity
+            intent.putExtra("barberID", "barber4"); // Pass the barber ID
+            intent.putExtra("barberName", barber4NameTV.getText().toString()); // Pass the barber name
+            intent.putExtra("barberLocation", barber4LocationTV.getText().toString()); // Pass the barber location
             startActivityForResult(intent, 1);
         });
 
         Barber5.setOnClickListener(v -> {
             Intent intent = new Intent(Booking.this, services.class);
-            intent.putExtra("barberID", "barber5"); // Pass the barber ID to the services activity
+            intent.putExtra("barberID", "barber5"); // Pass the barber ID
+            intent.putExtra("barberName", barber5NameTV.getText().toString()); // Pass the barber name
+            intent.putExtra("barberLocation", barber5LocationTV.getText().toString()); // Pass the barber location
             startActivityForResult(intent, 1);
         });
     }
