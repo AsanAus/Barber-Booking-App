@@ -10,5 +10,3 @@ For barbers at any stage in the game:
 1. Experienced barbers
 2. Up-and-coming barbers
 3. Student barber
-
-my name is ernest testt 
