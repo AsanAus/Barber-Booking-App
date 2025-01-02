@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.barberbookingapp.BookingModule.Booking;
 import com.example.barberbookingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class upcoming_booking extends AppCompatActivity {
 
@@ -76,18 +79,19 @@ public class upcoming_booking extends AppCompatActivity {
 
         fetchAppointmentData();
 
-        //UpcomingBookingModelArrayList.add(new UpcomingBookingModel(R.drawable.usericon,"Nadhea","DEC 10 Jan","9.00 PM","Kelana Jaya"));
-        //UpcomingBookingModelArrayList.add(new UpcomingBookingModel(R.drawable.homepage,"Asan","DEC 11 Jan","10.00 PM","Subang Jaya"));
-        //UpcomingBookingModelArrayList.add(new UpcomingBookingModel(R.drawable.homepage,"Ali","DEC 12 Jan","11.00 PM","Subang Ria"));
+        //Handle "Book Now" button
+        Button bookNowButton = findViewById(R.id.bookNowButton);
+        bookNowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(upcoming_booking.this, Booking.class);
+                startActivity(intent);
+            }
+        });
 
 
 
-
-      //  upcomingBookingAdapter upcomingBookingAdapter = new upcomingBookingAdapter(this,UpcomingBookingModelArrayList);
-      //  recyclerView.setAdapter(upcomingBookingAdapter);
-
-
-    }   ///end
+    }
 
     private void fetchAppointmentData() {
         DatabaseReference appointmentsRef = FirebaseDatabase.getInstance().getReference("appointments");
@@ -100,33 +104,54 @@ public class upcoming_booking extends AppCompatActivity {
         appointmentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot appointmentSnapshot : snapshot.getChildren()){
-                    String barberID = appointmentSnapshot.child("barberID").getValue(String.class);
-                    String date = appointmentSnapshot.child("date").getValue(String.class);
-                    String time = appointmentSnapshot.child("time").getValue(String.class);
+                boolean hasPendingAppointments = false;
 
-                    //Fetch Babrber Details
-                    barberRef.child(barberID).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot barbersnapshot) {
-                            String username = barbersnapshot.child("username").getValue(String.class);
-                            String location = barbersnapshot.child("location").getValue(String.class);
-                            int profilePicture = R.drawable.usericon;
 
-                            // Add new booking to the list
-                            UpcomingBookingModelArrayList.add(new UpcomingBookingModel(profilePicture,username,date,time,location));
+                for (DataSnapshot appointmentSnapshot : snapshot.getChildren()) {
+                        String appointmentID = appointmentSnapshot.getKey();
+                        String barberID = appointmentSnapshot.child("barberID").getValue(String.class);
+                        String date = appointmentSnapshot.child("date").getValue(String.class);
+                        String time = appointmentSnapshot.child("time").getValue(String.class);
+                        String status = appointmentSnapshot.child("status").getValue(String.class);
 
-                            // Notify adapter
-                            adapter.notifyDataSetChanged();
+                        if ("pending".equals(status)) {
+                            hasPendingAppointments = true;
+                            //Fetch Babrber Details
+                            barberRef.child(barberID).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot barbersnapshot) {
+                                    String username = barbersnapshot.child("username").getValue(String.class);
+                                    String location = barbersnapshot.child("location").getValue(String.class);
+                                    int profilePicture = R.drawable.usericon;
+
+
+                                    // Add new booking to the list
+                                    UpcomingBookingModelArrayList.add(new UpcomingBookingModel(profilePicture, username, date, time, location,appointmentID));
+
+                                    // Notify adapter
+                                    adapter.notifyDataSetChanged();
+
+                                }
+
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(upcoming_booking.this, "Failed to load barber details", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(upcoming_booking.this, "Failed to load barber details", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                // Update visibility based on data
+                if (hasPendingAppointments) {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    findViewById(R.id.noAppointmentsCard).setVisibility(View.GONE);
+                } else {
+                    recyclerView.setVisibility(View.GONE);
+                    findViewById(R.id.noAppointmentsCard).setVisibility(View.VISIBLE);
                 }
+
             }
 
             @Override

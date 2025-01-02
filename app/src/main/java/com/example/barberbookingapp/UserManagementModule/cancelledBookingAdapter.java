@@ -69,14 +69,15 @@ class CancelledBookingHolder extends RecyclerView.ViewHolder{
 ///////////////////////////////////CancelledBookingModel//////////////////////////////
 class CancelledBookingModel{
     int image;
-    String barberName, bookingDate, bookingTime , bookingLocation;
+    String barberName, bookingDate, bookingTime , bookingLocation,appointmentID;
 
-    public CancelledBookingModel(int image,String barberName, String bookingDate, String bookingTime, String bookingLocation) {
+    public CancelledBookingModel(int image,String barberName, String bookingDate, String bookingTime, String bookingLocation, String appointmentID) {
         this.image = image;
         this.barberName = barberName;
         this.bookingDate = bookingDate;
         this.bookingTime = bookingTime;
         this.bookingLocation = bookingLocation;
+        this.appointmentID = appointmentID;
     }
 
     public int getImage() {
@@ -117,5 +118,13 @@ class CancelledBookingModel{
 
     public void setBarberName(String barberName) {
         this.barberName = barberName;
+    }
+
+    public String getAppointmentID() {
+        return appointmentID;
+    }
+
+    public void setAppointmentID(String appointmentID) {
+        this.appointmentID = appointmentID;
     }
 }
