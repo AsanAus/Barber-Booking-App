@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".Booking">
+    tools:context=".BookingModule.Booking">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ServiceHeader"
@@ -83,7 +83,7 @@
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="45dp"
                     android:text="30 Minutes"
-                    android:textColor="@color/gray_600" />
+                    android:textColor="#737070" />
 
                 <TextView
                     android:id="@+id/Service1NameTV"
@@ -136,7 +136,7 @@
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="45dp"
                     android:text="30 Minutes"
-                    android:textColor="@color/gray_600" />
+                    android:textColor="737070FF" />
 
                 <TextView
                     android:id="@+id/Service2NameTV"
@@ -188,7 +188,7 @@
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="45dp"
                     android:text=" 20 Minutes"
-                    android:textColor="@color/gray_600" />
+                    android:textColor="737070FF" />
 
                 <TextView
                     android:id="@+id/Service3NameTV"
@@ -237,7 +237,7 @@
                 <TextView
                     android:id="@+id/Service4TimeTV"
                     android:layout_width="wrap_content"
-                    android:textColor="@color/gray_600"
+                    android:textColor="737070FF"
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="45dp"
                     android:layout_height="wrap_content"

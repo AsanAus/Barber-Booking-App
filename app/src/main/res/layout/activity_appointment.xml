@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".Booking">
+    tools:context=".BookingModule.Booking">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/Appointment1Header"
@@ -100,7 +100,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="15dp"
                     android:text="Subang Jaya"
-                    android:textColor="@color/gray_600"
+                    android:textColor="737070FF"
                     android:textSize="12dp" />
 
                 <TextView
@@ -281,7 +281,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="40dp"
                     android:text="RM 25.00"
-                    android:textColorLink="@color/gray_600"
+                    android:textColorLink="737070FF"
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
