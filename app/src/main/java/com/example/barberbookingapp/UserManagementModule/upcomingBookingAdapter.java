@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class upcomingBookingAdapter extends RecyclerView.Adapter<UpcomingBookingHolder> {
     Context context;
     ArrayList<UpcomingBookingModel> UpcomingBookingModelArrayList = new ArrayList<>();
+    private upcomingBookingAdapter adapter;
 
     public upcomingBookingAdapter(Context context, ArrayList<UpcomingBookingModel> upcomingBookingModelArrayList) {
         this.context = context;
@@ -32,6 +33,9 @@ public class upcomingBookingAdapter extends RecyclerView.Adapter<UpcomingBooking
 
     @Override
     public void onBindViewHolder(@NonNull UpcomingBookingHolder holder, int position) {
+
+        UpcomingBookingModel model = UpcomingBookingModelArrayList.get(position);
+
         holder.IVbarberProfilePicture.setImageResource(UpcomingBookingModelArrayList.get(position).getImage());
         holder.TVbarberName.setText(UpcomingBookingModelArrayList.get(position).getBarberName());
         holder.TVbookingDate.setText(UpcomingBookingModelArrayList.get(position).getBookingDate());

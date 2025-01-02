@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.barberbookingapp.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class appointment extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class appointment extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_appointment); // Use a distinct layout for this activity
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.Appointment2DateAndTimeDateYearTV), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.appointmentRoot), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;

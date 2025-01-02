@@ -91,7 +91,7 @@
                         android:layout_marginLeft="43dp"
                         android:layout_marginTop="90dp"
                         android:text="Ku Ku Bird"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/Barber2LocationTV"
@@ -102,7 +102,7 @@
                         android:textColor="@color/black"
 
                         android:text="Petaling Jaya"
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
                     <RatingBar
                         android:id="@+id/Barber2RatingBar"
@@ -124,10 +124,12 @@
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="21dp"
-                        android:layout_marginTop="134dp"
+                        android:layout_marginTop="140dp"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8dp" />
+                        android:textSize="8sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bookingbuttonedit"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -163,7 +165,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="90dp"
                         android:text="San Aus"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/Barber1LocationTV"
@@ -174,7 +176,7 @@
 
                         android:layout_marginTop="110dp"
                         android:text="Subang Jaya"
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
                     <RatingBar
                         android:id="@+id/Barber1RatingBar"
@@ -196,10 +198,12 @@
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="21dp"
-                        android:layout_marginTop="134dp"
+                        android:layout_marginTop="140dp"
+                        android:background="@drawable/bookingbuttonedit"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8dp" />
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -237,7 +241,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="90dp"
                         android:text="Nadhea"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/Barber4LocationTV"
@@ -247,7 +251,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="110dp"
                         android:text="Puchong"
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
                     <RatingBar
                         android:id="@+id/Barber4RatingBar"
@@ -269,10 +273,12 @@
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="21dp"
-                        android:layout_marginTop="134dp"
+                        android:layout_marginTop="140dp"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8dp" />
+                        android:textSize="8sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bookingbuttonedit"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -309,7 +315,7 @@
                         android:layout_marginLeft="33dp"
                         android:layout_marginTop="90dp"
                         android:text="Ernest Chean"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/Barber3LocationTV"
@@ -319,7 +325,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="110dp"
                         android:text="Bangsar"
-                        android:textSize="10dp"/>
+                        android:textSize="10sp"/>
 
                     <RatingBar
                         android:id="@+id/Barber3RatingBar"
@@ -341,10 +347,12 @@
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="21dp"
-                        android:layout_marginTop="134dp"
+                        android:layout_marginTop="140dp"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8dp" />
+                        android:textSize="8sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bookingbuttonedit"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -380,7 +388,7 @@
                         android:layout_marginTop="90dp"
                         android:textColor="@color/black"
                         android:text="Sarah"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/Barber5LocationTV"
@@ -390,7 +398,7 @@
                         android:layout_marginTop="110dp"
                         android:text="Kepong"
                         android:textColor="@color/black"
-                        android:textSize="10dp"/>
+                        android:textSize="10sp"/>
 
                     <RatingBar
                         android:id="@+id/Barber5RatingBar"
@@ -412,10 +420,12 @@
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="21dp"
-                        android:layout_marginTop="134dp"
+                        android:layout_marginTop="140dp"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8dp" />
+                        android:textSize="8sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bookingbuttonedit"/>
 
                 </androidx.cardview.widget.CardView>
 

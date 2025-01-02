@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.R;
+import com.example.barberbookingapp.UserManagementModule.upcoming_booking;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -93,6 +94,8 @@ public class lastConfirm extends AppCompatActivity {
         lastconfirm.setOnClickListener(v -> {
             // Write data to Firebase when Last Confirm button is clicked
             writeToFirebase(barberID, barberLocation, serviceName, totalPrice, selectedDate, selectedTime);
+            Intent intent =  new Intent(lastConfirm.this, upcoming_booking.class);
+            startActivity(intent);
         });
     }
 

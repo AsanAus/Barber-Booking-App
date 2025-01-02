@@ -45,7 +45,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">>
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                     android:layout_marginLeft="270dp"
                     android:layout_marginTop="30dp"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:text="RM 25.00" />
 
                 <TextView
@@ -94,7 +94,7 @@
                     android:gravity="center"
                     android:text="Men's Hair Cut"
                     android:textColor="@color/black"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <CheckBox
@@ -126,7 +126,7 @@
                     android:layout_marginTop="30dp"
                     android:text="RM 20.00"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -136,7 +136,7 @@
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="45dp"
                     android:text="30 Minutes"
-                    android:textColor="737070FF" />
+                    android:textColor="#737070" />
 
                 <TextView
                     android:id="@+id/Service2NameTV"
@@ -147,7 +147,7 @@
                     android:gravity="center"
                     android:text="Kid's Hair Cut"
                     android:textColor="@color/black"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <CheckBox
@@ -178,7 +178,7 @@
                     android:layout_marginLeft="270dp"
                     android:layout_marginTop="30dp"
                     android:textStyle="bold"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:text="RM 25.00" />
 
                 <TextView
@@ -188,7 +188,7 @@
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="45dp"
                     android:text=" 20 Minutes"
-                    android:textColor="737070FF" />
+                    android:textColor="#737070" />
 
                 <TextView
                     android:id="@+id/Service3NameTV"
@@ -199,7 +199,7 @@
                     android:gravity="center"
                     android:text="Long Trim Haircut"
                     android:textColor="@color/black"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <CheckBox
@@ -231,13 +231,13 @@
                     android:layout_marginTop="30dp"
                     android:text="RM 120.00"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/Service4TimeTV"
                     android:layout_width="wrap_content"
-                    android:textColor="737070FF"
+                    android:textColor="#737070"
                     android:layout_marginLeft="125dp"
                     android:layout_marginTop="45dp"
                     android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                     android:gravity="center"
                     android:text="Hair Treatment"
                     android:textColor="@color/black"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <CheckBox
@@ -268,8 +268,9 @@
                 android:layout_marginBottom="44dp"
                 android:text="Comfirm"
                 android:textColor="@color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
+                android:background="@drawable/bookingbuttonedit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"

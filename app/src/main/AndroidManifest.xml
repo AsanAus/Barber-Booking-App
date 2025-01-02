@@ -52,6 +52,21 @@
             android:name=".UserManagementModule.AboutApp"
             android:exported="false"/>
         <activity
+            android:name=".BookingModule.appointment"
+            android:exported="false"/>
+        <activity
+            android:name=".BookingModule.Booking"
+            android:exported="false"/>
+        <activity
+            android:name=".BookingModule.services"
+            android:exported="false"/>
+        <activity
+            android:name=".BookingModule.date_and_time"
+            android:exported="false"/>
+        <activity
+            android:name=".BookingModule.lastConfirm"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>

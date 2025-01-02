@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
+import com.example.barberbookingapp.R;
 
 /**
  * TODO: document your custom view class.

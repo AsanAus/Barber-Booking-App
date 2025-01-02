@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Declare styleable for MyView -->
+    <declare-styleable name="MyView">
+        <!-- Example string attribute -->
+        <attr name="exampleString" format="string" />
+        <!-- Example color attribute -->
+        <attr name="exampleColor" format="color" />
+        <!-- Example dimension attribute -->
+        <attr name="exampleDimension" format="dimension" />
+        <!-- Example drawable attribute -->
+        <attr name="exampleDrawable" format="reference" />
+    </declare-styleable>
+
+</resources>
