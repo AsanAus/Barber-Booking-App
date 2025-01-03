@@ -13,9 +13,6 @@
         android:theme="@style/Theme.BarberBookingApp"
         tools:targetApi="31" >
         <activity
-            android:name=".BarberManagementModule.BarberHome"
-            android:exported="false" />
-        <activity
             android:name=".GeneralModule.BarberLogin"
             android:exported="false" />
         <activity
@@ -66,6 +63,22 @@
         <activity
             android:name=".BookingModule.lastConfirm"
             android:exported="false"/>
+        <activity
+            android:name=".BarberManagementModule.BarberGallery"
+            android:exported="false" />
+        <activity
+            android:name=".BarberManagementModule.Services"
+            android:exported="false" />
+        <activity
+            android:name=".BarberManagementModule.BarberEditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".BarberManagementModule.BarberProfile"
+            android:exported="false" />
+        <activity
+            android:name=".BarberManagementModule.BarberAdmin"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" >

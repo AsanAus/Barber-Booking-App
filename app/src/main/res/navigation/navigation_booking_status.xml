@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_booking_status"
+    app:startDestination="@id/Pending">
+
+    <fragment
+        android:id="@+id/Pending"
+        android:name="com.example.barberbookingapp.BarberManagementModule.PendingFragment"
+        android:label="fragment_pending"
+        tools:layout="@layout/pending_fragment" />
+    <fragment
+        android:id="@+id/Upcoming"
+        android:name="com.example.barberbookingapp.BarberManagementModule.UpcomingFragment"
+        android:label="fragment_upcoming"
+        tools:layout="@layout/upcoming_fragment" />
+    <fragment
+        android:id="@+id/Completed"
+        android:name="com.example.barberbookingapp.BarberManagementModule.CompletedFragment"
+        android:label="fragment_completed"
+        tools:layout="@layout/completed_fragment" />
+
+</navigation>

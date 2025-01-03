@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    app:cardBackgroundColor="@color/purple2"
+    app:cardCornerRadius="35dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="40dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="40dp"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:id="@+id/TVServiceType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="upcoming name"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TVDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 hour"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/TVServiceType"
+            app:layout_constraintTop_toBottomOf="@+id/TVServiceType" />
+
+        <TextView
+            android:id="@+id/TVPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RM 30.00"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/TVDuration"
+            app:layout_constraintTop_toBottomOf="@+id/TVDuration" />
+
+        <ImageButton
+            android:id="@+id/IBDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/trash"
+            app:srcCompat="@drawable/trash" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

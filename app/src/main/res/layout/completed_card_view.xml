@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/purple2"
+    app:cardCornerRadius="35dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="50dp"
+        android:paddingTop="25dp"
+        android:paddingEnd="50dp"
+        android:paddingBottom="25dp">
+
+        <TextView
+            android:id="@+id/TVName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="upcoming name"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/IVCalendar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/calendar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TVName" />
+
+        <TextView
+            android:id="@+id/TVDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="THU 26 May"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/IVCalendar"
+            app:layout_constraintStart_toEndOf="@+id/IVCalendar"
+            app:layout_constraintTop_toTopOf="@+id/IVCalendar" />
+
+        <ImageView
+            android:id="@+id/IVPhone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/phone"
+            app:layout_constraintStart_toEndOf="@+id/IVCalendar"
+            app:layout_constraintTop_toBottomOf="@+id/TVName" />
+
+        <TextView
+            android:id="@+id/TVContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="011-11961005"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/IVPhone"
+            app:layout_constraintStart_toEndOf="@+id/IVPhone"
+            app:layout_constraintTop_toTopOf="@+id/IVPhone" />
+
+        <ImageView
+            android:id="@+id/IVClock"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/clock"
+            app:layout_constraintStart_toStartOf="@+id/IVCalendar"
+            app:layout_constraintTop_toBottomOf="@+id/IVCalendar" />
+
+        <TextView
+            android:id="@+id/TVTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="11.00AM"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/IVClock"
+            app:layout_constraintStart_toEndOf="@+id/IVClock"
+            app:layout_constraintTop_toTopOf="@+id/IVClock" />
+
+        <ImageView
+            android:id="@+id/IVServiceType"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/scissors"
+            app:layout_constraintStart_toStartOf="@+id/IVPhone"
+            app:layout_constraintTop_toBottomOf="@+id/IVPhone" />
+
+        <TextView
+            android:id="@+id/TVServiceType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Men Haircut"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/IVServiceType"
+            app:layout_constraintStart_toEndOf="@+id/IVServiceType"
+            app:layout_constraintTop_toTopOf="@+id/IVServiceType" />
+
+        <TextView
+            android:id="@+id/TVPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="RM 25.00"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TVTime" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -4,6 +4,44 @@
     <string name="facebook_app_id">1234</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="WelcomeBarber">Welcome, Barber</string>
+    <string name="BarberBooking">The\nBarber Booking\nApp</string>
+    <string name="Pending">Pending</string>">
+    <string name="Upcoming">Upcoming</string>
+    <string name="Completed">Completed</string>
+    <string name="MyProfile">My Profile</string>
+    <string name="EditProfile">Edit Profile</string>
+    <string name="MyService">My Service</string>
+    <string name="TimeSlot">Time Slot</string>
+    <string name="Gallery">Gallery</string>
+    <string name="LogOut">Log Out</string>
+    <string name="Name">Placeholder Name</string>
+    <string name="Back">Back</string>
+    <string name="SaveChanges">Save Changes</string>
+    <string name="Username">Username</string>
+    <string name="Email">Email</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="Password">Password</string>
+    <string name="Description">Description</string>
+    <string name="NameOfService">Name of Service</string>
+    <string name="Duration">Duration</string>
+    <string name="Price">Price</string>
+    <string name="AddService">Add Service</string>
+    <string name="RM">RM </string>
+    <string name="Hour">Hour</string>
+    <string name="Min">Min</string>
+    <string name="TimeSlotAvailability">Time Slot Availability</string>
+    <string name="Date">Date</string>
+    <string name="Time">Time</string>
+    <string name="AddImages">No images yet.\nAdd some images for your shop!</string>
+    <string name="Accept">Accept</string>
+    <string name="Decline">Decline</string>
+    <string name="Done">Done</string>
+    <string name="CreatedServices">Created Services</string>
 </resources>

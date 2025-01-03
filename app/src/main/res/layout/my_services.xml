@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Services">
+
+    <TextView
+        android:id="@+id/TVMyService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple2"
+        android:fontFamily="@font/inter_bold"
+        android:includeFontPadding="true"
+        android:padding="20dp"
+        android:text="@string/MyService"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/BTBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/inter_medium"
+        android:padding="5dp"
+        android:text="@string/Back"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:icon="@drawable/back"
+        app:iconPadding="-20dp"
+        app:iconGravity="start"
+        app:iconSize="10dp"
+        app:iconTint="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/TVMyService"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVNameOfService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/NameOfService"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/ETNameOfService"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyService" />
+
+    <EditText
+        android:id="@+id/ETNameOfService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/purple_et_background"
+        android:ems="10"
+        android:fontFamily="@font/inter"
+        android:inputType="text"
+        android:padding="14dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/grey_text"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVNameOfService" />
+
+    <TextView
+        android:id="@+id/TVDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/Duration"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/ETNameOfService"
+        app:layout_constraintTop_toBottomOf="@+id/ETNameOfService" />
+
+    <NumberPicker
+        android:id="@+id/HourPicker"
+        android:layout_width="50dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/purple_et_background"
+        app:layout_constraintStart_toStartOf="@+id/TVDuration"
+        app:layout_constraintTop_toBottomOf="@+id/TVDuration" />
+
+    <TextView
+        android:id="@+id/TVHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/Hour"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/HourPicker"
+        app:layout_constraintStart_toStartOf="@+id/HourPicker"
+        app:layout_constraintTop_toBottomOf="@+id/HourPicker" />
+
+    <TextView
+        android:id="@+id/TVPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/Price"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/TILPrice"
+        app:layout_constraintTop_toBottomOf="@+id/ETNameOfService" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TILPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:minWidth="130dp"
+        android:background="@drawable/purple_et_background"
+        app:expandedHintEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@+id/ETNameOfService"
+        app:layout_constraintTop_toBottomOf="@+id/TVPrice"
+        app:prefixText="@string/RM"
+        app:prefixTextAppearance="@font/inter"
+        app:prefixTextColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TILETPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:background="@drawable/purple_et_background"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textColor="@color/grey_text"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/BTAddService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/purple_et_background"
+        android:fontFamily="@font/inter_medium"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="@string/AddService"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:backgroundTint="@null"
+        app:icon="@drawable/plus"
+        app:iconTint="@color/black"
+        app:iconGravity="start"
+        app:iconSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/TILPrice"
+        app:layout_constraintStart_toStartOf="@+id/TILPrice"
+        app:layout_constraintTop_toBottomOf="@+id/TILPrice" />
+
+    <TextView
+        android:id="@+id/TVMyServices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginTop="20dp"
+        android:text="@string/CreatedServices"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVHour" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvServices"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="12dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVMyServices"
+        tools:listitem="@layout/my_services_card_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

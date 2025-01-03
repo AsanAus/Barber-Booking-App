@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BarberManagementModule.BarberGallery">
+
+    <TextView
+        android:id="@+id/TVGallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple2"
+        android:fontFamily="@font/inter_bold"
+        android:includeFontPadding="true"
+        android:padding="20dp"
+        android:text="@string/Gallery"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/BTBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/inter_medium"
+        android:padding="5dp"
+        android:text="@string/Back"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:icon="@drawable/back"
+        app:iconPadding="-20dp"
+        app:iconGravity="start"
+        app:iconSize="10dp"
+        app:iconTint="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/TVGallery"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVNoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AddImages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TVGallery"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:layout_marginTop="32dp"
+        android:textAlignment="center"/>
+
+    <GridView
+        android:id="@+id/GVGallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:verticalSpacing="16dp"
+        android:horizontalSpacing="16dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/TVGallery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </GridView>
+
+    <ImageButton
+        android:id="@+id/IBAddImages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:background="@android:color/transparent"
+        android:src="@drawable/plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/plus" />
+</androidx.constraintlayout.widget.ConstraintLayout>
