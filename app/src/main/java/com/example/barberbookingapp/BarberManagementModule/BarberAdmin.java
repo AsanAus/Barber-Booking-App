@@ -120,7 +120,7 @@ public class BarberAdmin extends AppCompatActivity {
         if (item.getItemId() == R.id.userProfileIcon) {
             Log.d("BarberAdmin", "Navigating to BarberProfile");
             // Redirect to MyProfileActivity
-            Intent intent = new Intent(this, Login.class);
+            Intent intent = new Intent(this, BarberProfile.class);
             startActivity(intent);
             return true;
         }

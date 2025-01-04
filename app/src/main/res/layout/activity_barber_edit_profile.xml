@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/BTBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,37 +47,50 @@
 
     <ImageView
         android:id="@+id/IVProfile"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="160dp"
+        android:layout_height="144dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner"
         android:src="@drawable/user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVMyService"
-        app:tint="@color/black"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <ImageButton
-        android:id="@+id/IBChangeProfilePicture"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
+<!--    <ImageButton-->
+<!--        android:id="@+id/IBChangeProfilePicture"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:contentDescription="TODO"-->
+<!--        android:padding="0dp"-->
+<!--        android:src="@drawable/camera"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/IVProfile"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/IVProfile"-->
+<!--        tools:srcCompat="@drawable/camera" />-->
+
+    <ImageView
+        android:id="@+id/IVsmallcamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="236dp"
+        android:layout_marginTop="108dp"
         android:layout_marginBottom="8dp"
-        android:padding="0dp"
-        android:src="@drawable/camera"
-        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/IVProfile"
         app:layout_constraintEnd_toEndOf="@+id/IVProfile"
-        tools:srcCompat="@drawable/camera" />
+        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_add_a_photo_24" />
 
     <LinearLayout
         android:id="@+id/LLProfileInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="40dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -101,6 +114,7 @@
             android:layout_marginTop="4dp"
             android:background="@drawable/purple_et_background"
             android:ems="10"
+            android:text="name"
             android:fontFamily="@font/inter"
             android:inputType="text"
             android:paddingStart="16dp"
@@ -125,6 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:text="email"
             android:background="@drawable/purple_et_background"
             android:ems="10"
             android:fontFamily="@font/inter"
@@ -155,32 +170,7 @@
             android:ems="10"
             android:fontFamily="@font/inter"
             android:inputType="phone"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:padding="14dp"
-            android:textColor="@color/grey_text"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/TVPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/inter_medium"
-            android:includeFontPadding="true"
-            android:text="@string/Password"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/ETPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/purple_et_background"
-            android:ems="10"
-            android:fontFamily="@font/inter"
-            android:inputType="textPassword"
+            android:text="Enter your phone number"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:padding="14dp"
@@ -205,6 +195,7 @@
             android:layout_marginTop="4dp"
             android:background="@drawable/purple_et_background"
             android:ems="10"
+            android:text="Your Description"
             android:fontFamily="@font/inter"
             android:gravity="start|top"
             android:inputType="textMultiLine"
@@ -215,4 +206,18 @@
             android:textColor="@color/grey_text"
             android:textSize="14sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/BTNsaveChanges"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/editprofilebutton"
+        android:text="save changes"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LLProfileInfo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
