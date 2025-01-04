@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.R;
+import com.example.barberbookingapp.UserManagementModule.HomePage;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class appointment extends AppCompatActivity {
@@ -26,6 +28,18 @@ public class appointment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_appointment); // Use a distinct layout for this activity
+
+        // Find the TextView by its ID
+        TextView backToHome = findViewById(R.id.TVbacktoHomePage);//For Back button return to previous page which is(HomePage)
+        // Set an OnClickListener to navigate to HomePageActivity
+        backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(appointment.this, HomePage.class);
+                startActivity(intent);
+                finish(); // Optional: Close the current activity
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.appointmentRoot), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

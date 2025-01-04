@@ -2,6 +2,7 @@ package com.example.barberbookingapp.BookingModule;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.R;
+import com.example.barberbookingapp.UserManagementModule.HomePage;
+import com.example.barberbookingapp.UserManagementModule.MyProfile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +35,19 @@ public class Booking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.barber_list);
+
+        // Find the TextView by its ID
+        TextView backToHome = findViewById(R.id.TVbacktoHomePage);//For Back button return to previous page which is(HomePage)
+        // Set an OnClickListener to navigate to HomePageActivity
+        backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Booking.this, HomePage.class);
+                startActivity(intent);
+                finish(); // Optional: Close the current activity
+            }
+        });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.Appointment2DateAndTimeDateYearTV), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

@@ -21,6 +21,19 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
+            android:id="@+id/TVbacktoHomePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="Back"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/BarberListTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -171,11 +184,11 @@
                 android:id="@+id/Appointment2DateAndTimeCardView"
                 android:layout_width="350dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="396dp"
+                android:layout_marginTop="408dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 

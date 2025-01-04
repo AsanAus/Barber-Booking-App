@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.barberbookingapp.BookingModule.Booking;
+import com.example.barberbookingapp.BookingModule.appointment;
 import com.example.barberbookingapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -84,7 +85,7 @@ public class upcoming_booking extends AppCompatActivity {
         bookNowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(upcoming_booking.this, Booking.class);
+                Intent intent = new Intent(upcoming_booking.this, appointment.class);
                 startActivity(intent);
             }
         });

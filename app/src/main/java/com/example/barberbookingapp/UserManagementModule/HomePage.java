@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.BookingModule.Booking;
+import com.example.barberbookingapp.BookingModule.appointment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.view.View;
@@ -56,7 +57,7 @@ public class HomePage extends AppCompatActivity {
                   startActivity(new Intent(HomePage.this, HomePage.class));
                     return true;
                 } else if (item.getItemId() == R.id.DestBooking) {
-                    startActivity(new Intent(HomePage.this, Booking.class));
+                    startActivity(new Intent(HomePage.this, appointment.class));
                     return true;
                 } else if (item.getItemId() == R.id.DestAboutApp) {
                     startActivity(new Intent(HomePage.this, AboutApp.class));
