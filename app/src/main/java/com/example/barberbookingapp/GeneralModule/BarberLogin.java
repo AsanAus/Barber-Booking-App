@@ -120,7 +120,7 @@ public class BarberLogin extends AppCompatActivity {
                     auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Login successful
-                            Toast.makeText(BarberLogin.this, "Login successful!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(BarberLogin.this, "Barber Login successful!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(BarberLogin.this, BarberAdmin.class);
                             startActivity(intent);
                         } else {
