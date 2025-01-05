@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class Services extends AppCompatActivity {
 
     private EditText serviceNameEditText;
-    private TextInputEditText priceEditText;
+    private EditText priceEditText;
     private NumberPicker hourPicker;
     private Button submitButton;
     private FirebaseDatabase firebaseDatabase;
@@ -56,7 +56,7 @@ public class Services extends AppCompatActivity {
             return insets;
         });
 
-        MaterialButton Back = findViewById(R.id.BTBack);
+        Button Back = findViewById(R.id.BTBack);
         Back.setOnClickListener(view -> {
             startActivity(new Intent(this, BarberProfile.class));
         });
