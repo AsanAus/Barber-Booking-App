@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/BTBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,6 +71,7 @@
         android:padding="14dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:hint="name your service"
         android:textColor="@color/grey_text"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,38 +138,39 @@
         app:prefixTextAppearance="@font/inter"
         app:prefixTextColor="@color/black">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/TILETPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
             android:background="@drawable/purple_et_background"
+            android:fontFamily="@font/inter"
+            android:hint="0.00"
             android:inputType="numberDecimal"
             android:maxLength="6"
             android:textColor="@color/grey_text"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/BTAddService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/purple_et_background"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="67dp"
+        android:background="@drawable/button_bg"
         android:fontFamily="@font/inter_medium"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:text="@string/AddService"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="14sp"
         app:backgroundTint="@null"
         app:icon="@drawable/plus"
-        app:iconTint="@color/black"
         app:iconGravity="start"
         app:iconSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/TILPrice"
-        app:layout_constraintStart_toStartOf="@+id/TILPrice"
+        app:iconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TILPrice" />
 
     <TextView

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BarberListViewModule.BarberDetails">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/BarbersHeader"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#EBEBFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/TVbacktoHomePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="Back"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/BarberListTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="San Aus"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.631" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="295dp"
+        android:layout_height="163dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BarbersHeader"
+        tools:srcCompat="@drawable/img"
+        android:background="@drawable/image_corner"
+        android:clipToOutline="true"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="380dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Details"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/inter"
+            android:text="The best barber in your city"
+            android:textColor="#656F77"
+            android:textSize="14sp" />
+
+        <!-- Location, Phone, Time, Rating -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <!-- Location -->
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="8dp"
+                android:text="Subang Jaya"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <!-- Phone -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="8dp"
+                android:text="011-11961005"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <!-- Time -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:drawableStart="@drawable/ic_clock"
+                android:drawablePadding="8dp"
+                android:text="11.00AM - 12.00AM"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <!-- Rating -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:drawableStart="@drawable/ic_blackstar"
+                android:drawablePadding="8dp"
+                android:text="5.0"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+        </GridLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="11dp"
+        android:text="Gallery"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <ImageView
+            android:layout_width="148dp"
+            android:layout_height="226dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/black_border"
+            android:padding="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/gallery_image1" />
+
+        <ImageView
+            android:layout_width="148dp"
+            android:layout_height="226dp"
+            android:layout_gravity="center"
+            android:background="@drawable/black_border"
+            android:padding="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/gallery_image2" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

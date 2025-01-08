@@ -2,6 +2,7 @@ package com.example.barberbookingapp.BarberManagementModule;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,7 @@ public class BarberGallery extends AppCompatActivity {
             return insets;
         });
 
-        MaterialButton Back = findViewById(R.id.BTBack);
+        Button Back = findViewById(R.id.BTBack);
         Back.setOnClickListener(v -> {
             startActivity(new Intent(this, BarberProfile.class));
         });
