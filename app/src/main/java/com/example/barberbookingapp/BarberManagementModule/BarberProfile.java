@@ -67,7 +67,7 @@ public class BarberProfile extends AppCompatActivity {
         // Back
         Button Back = findViewById(R.id.BTBack);
         Back.setOnClickListener(view -> {
-            startActivity(new Intent(this, BarberAdmin.class));
+            startActivity(new Intent(this, pendingBarber.class));
         });
 
         //Edit Profile

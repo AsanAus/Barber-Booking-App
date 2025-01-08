@@ -18,6 +18,29 @@ public class Pending {
         this.pendingId = pendingId;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getName() {
         return name;

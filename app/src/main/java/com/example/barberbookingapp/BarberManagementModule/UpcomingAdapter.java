@@ -39,12 +39,13 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
     public void onBindViewHolder(@NonNull UpcomingViewHolder holder, int position) {
         Upcoming upcoming = UpcomingBookingArrayList.get(position);
 
-        holder.Name.setText(upcoming.getName());
+        holder.Name.setText(upcoming.getName()); // Assuming barberID is mapped to barber's name
         holder.Date.setText(upcoming.getDate());
         holder.Time.setText(upcoming.getTime());
         holder.ServiceType.setText(upcoming.getServiceType());
         holder.Price.setText(upcoming.getPrice());
         holder.Contact.setText(upcoming.getContact());
+
 
         holder.Done.setOnClickListener(v -> {
             moveItemToCompleted(upcoming, position);
@@ -53,37 +54,30 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
 
     private void moveItemToCompleted(Upcoming upcoming, int position) {
         // Reference to Firebase
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("appointments");
 
-        // Get id of booking
-        String id = (upcoming.UpcomingId);
+        // Get id of booking using the getter method
+        String id = upcoming.getUpcomingId();  
 
-        // Add the item to 'completed'
-        databaseRef.child("completed").child(id).setValue(upcoming)
+        // Update the 'status' field to 'completed'
+        databaseRef.child(id).child("status").setValue("completed")
                 .addOnSuccessListener(aVoid -> {
-                    // Remove the item from 'upcoming'
-                    databaseRef.child("upcoming").child(id).removeValue()
-                            .addOnSuccessListener(aVoid1 -> {
-                                // Remove from local list and notify adapter
-                                UpcomingBookingArrayList.remove(position);
-                                notifyItemRemoved(position);
+                    // Remove the item from the local list and notify the adapter
+                    UpcomingBookingArrayList.remove(position);
+                    notifyItemRemoved(position);
 
-                                // Display the key of the moved object
-                                Toast.makeText(context, "Successfully moved Booking ID " + id + " to completed", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                // Handle removal error
-                                Toast.makeText(context, "Failed to remove from upcoming", Toast.LENGTH_SHORT).show();
-                            });
+                    // Show success message
+                    Toast.makeText(context, "Booking ID " + id + " status updated to completed", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    // Handle addition error
-                    Toast.makeText(context, "Failed to move to completed", Toast.LENGTH_SHORT).show();
+                    // Handle update error
+                    Toast.makeText(context, "Failed to update status to completed", Toast.LENGTH_SHORT).show();
                 });
     }
 
     @Override
     public int getItemCount() {
+
         return UpcomingBookingArrayList.size();
     }
 

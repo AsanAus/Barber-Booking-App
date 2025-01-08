@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.barberbookingapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -82,26 +83,59 @@ public class PendingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        loadPendingBooking(view);
+        // Replace "currentBarberId" with the actual ID of the logged-in barber
+        String currentBarberId = getCurrentBarberId(); // Implement this method to fetch the current barber's ID
+
+        loadPendingBooking(view,currentBarberId);
     }
 
-    private void loadPendingBooking(View view) {
+    private void loadPendingBooking(View view,String barberID) {
         recyclerView = view.findViewById(R.id.rvPending);
-        databaseReference = FirebaseDatabase.getInstance().getReference("pending");
+        databaseReference = FirebaseDatabase.getInstance().getReference("appointments");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         PendingArrayList = new ArrayList<>();
         adapter = new PendingAdapter(this.getContext(), PendingArrayList);
         recyclerView.setAdapter(adapter);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("barberID").equalTo(barberID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                PendingArrayList.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String status = dataSnapshot.child("status").getValue(String.class);
+                    if("pending".equals(status)){
+                        Pending pending = new Pending();
+                        pending.setPendingId(dataSnapshot.getKey());
+                        pending.setDate(dataSnapshot.child("date").getValue(String.class));
+                        pending.setTime(dataSnapshot.child("time").getValue(String.class));
+                        pending.setServiceType(dataSnapshot.child("serviceName").getValue(String.class));
+                        pending.setPrice(dataSnapshot.child("servicePrice").getValue(String.class));
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Pending pending = dataSnapshot.getValue(Pending.class);
-                    PendingArrayList.add(pending);
+                        String userId = dataSnapshot.child("userID").getValue(String.class);
+                        fetchUserDetails(userId, pending);
+                    }
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+    }
+
+    private void fetchUserDetails(String userId, Pending pending) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pending.setName(snapshot.child("username").getValue(String.class));
+                pending.setContact(snapshot.child("phoneNumber").getValue(String.class));
+                PendingArrayList.add(pending);
                 adapter.notifyDataSetChanged();
             }
 
@@ -110,5 +144,11 @@ public class PendingFragment extends Fragment {
 
             }
         });
+    }
+
+    private String getCurrentBarberId() {
+        // Retrieve the current barber ID from shared preferences, authentication session, or other methods
+        return FirebaseAuth.getInstance().getCurrentUser().getUid(); // Example using Firebase Authentication
+
     }
 }

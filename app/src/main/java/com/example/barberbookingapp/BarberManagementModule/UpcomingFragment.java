@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.barberbookingapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,26 +84,63 @@ public class UpcomingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        loadUpcomingBooking(view);
+        // Replace "currentBarberId" with the actual ID of the logged-in barber
+        String currentBarberId = getCurrentBarberId(); // Implement this method to fetch the current barber's ID
+
+
+        loadUpcomingBooking(view, currentBarberId);
     }
 
-    private void loadUpcomingBooking(View view) {
+    private void loadUpcomingBooking(View view, String barberID) {
         recyclerView = view.findViewById(R.id.rvUpcoming);
-        databaseReference = FirebaseDatabase.getInstance().getReference("upcoming");
+        databaseReference = FirebaseDatabase.getInstance().getReference("appointments");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         UpcomingArrayList = new ArrayList<>();
         adapter = new UpcomingAdapter(this.getContext(), UpcomingArrayList);
         recyclerView.setAdapter(adapter);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+
+
+        // Query appointments where barberID matches the logged-in barber and status is 'upcoming'
+        databaseReference.orderByChild("barberID").equalTo(barberID)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        UpcomingArrayList.clear();
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            // Filter by status = 'upcoming'
+                            String status = dataSnapshot.child("status").getValue(String.class);
+                            if ("upcoming".equals(status)) {
+                                Upcoming upcoming = new Upcoming();
+                                upcoming.setUpcomingId(dataSnapshot.getKey());
+                                upcoming.setDate(dataSnapshot.child("date").getValue(String.class));
+                                upcoming.setTime(dataSnapshot.child("time").getValue(String.class));
+                                upcoming.setServiceType(dataSnapshot.child("serviceName").getValue(String.class));
+                                upcoming.setPrice(dataSnapshot.child("servicePrice").getValue(String.class));
+
+                                String userId = dataSnapshot.child("userID").getValue(String.class);
+                                fetchUserDetails(userId, upcoming);
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void fetchUserDetails(String userId, Upcoming upcoming) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Upcoming upcoming = dataSnapshot.getValue(Upcoming.class);
-                    UpcomingArrayList.add(upcoming);
-                }
+                upcoming.setName(snapshot.child("username").getValue(String.class));
+                upcoming.setContact(snapshot.child("phoneNumber").getValue(String.class));
+                UpcomingArrayList.add(upcoming);
                 adapter.notifyDataSetChanged();
             }
 
@@ -111,5 +149,11 @@ public class UpcomingFragment extends Fragment {
 
             }
         });
+    }
+
+    private String getCurrentBarberId() {
+        // Retrieve the current barber ID from shared preferences, authentication session, or other methods
+        return FirebaseAuth.getInstance().getCurrentUser().getUid(); // Example using Firebase Authentication
+
     }
 }

@@ -29,18 +29,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class cancelled_booking extends AppCompatActivity {
-
+public class completed_booking extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<CancelledBookingModel> CancelledBookingModelArrayList = new ArrayList<>();
-
-    cancelledBookingAdapter adapter;
+    ArrayList<CompletedBookingModel> CompletedBookingModelArrayList = new ArrayList<>();
+    completedBookingAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_cancelled_booking);
+        setContentView(R.layout.activity_completed_booking);
 
         recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,9 +54,20 @@ public class cancelled_booking extends AppCompatActivity {
         backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(cancelled_booking.this, HomePage.class);
+                Intent intent = new Intent(completed_booking.this, HomePage.class);
                 startActivity(intent);
                 finish(); // Optional: Close the current activity
+            }
+        });
+
+
+        TextView cancelledBooking = findViewById(R.id.TVcancelled);
+        cancelledBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(completed_booking.this, cancelled_booking.class);
+                startActivity(intent);
+
             }
         });
 
@@ -66,74 +75,47 @@ public class cancelled_booking extends AppCompatActivity {
         upcomingBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(cancelled_booking.this, upcoming_booking.class);
+                Intent intent = new Intent(completed_booking.this, upcoming_booking.class);
                 startActivity(intent);
 
             }
         });
 
-        TextView completedBooking = findViewById(R.id.TVcompleted);
-        completedBooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(cancelled_booking.this, completed_booking.class);
-                startActivity(intent);
-
-            }
-        });
-
-
-        //Initialize adapter and set to RecyclerView
-        adapter = new cancelledBookingAdapter(this,CancelledBookingModelArrayList);
+        // Initialize adapter and set to RecyclerView
+        adapter =  new completedBookingAdapter(this, CompletedBookingModelArrayList);
         recyclerView.setAdapter(adapter);
 
-        // Get the appointmentId passed from the previous activity
-        String appointmentId = getIntent().getStringExtra("appointmentId");
-        if(appointmentId != null){
-            Log.d("AppointmentsID", "Received appointmentId: " + appointmentId);
-            // Handle the received bookingId (if needed)
-        }else {
-            Log.d("AppointmentID", "No appointmentId passed to this activity.");
-        }
+        String currentUserID = getCurrentUserID();
+        fetchAppointmentData(currentUserID);
 
-        String currentUserID = getCurrentUserId();
-
-
-        fetchAppointmentsData(currentUserID, appointmentId);
+        
+        
+        
     }
 
-    private String getCurrentUserId() {
-        String currentUserId = null;
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        }
-        Log.d("UserID", "Current user ID: " + currentUserId); // Log the barber ID
-        return currentUserId;
-    }
-
-    private void fetchAppointmentsData(String currentUserId, String appointmentId ) {
-            if(currentUserId == null) return;
+    private void fetchAppointmentData(String currentUserID) {
+        if (currentUserID == null) return;
 
         DatabaseReference appointmentsRef = FirebaseDatabase.getInstance().getReference("appointments");
         DatabaseReference barberRef = FirebaseDatabase.getInstance().getReference("Barbers");
 
 
-
         //Fetch Appointments
-        appointmentsRef.orderByChild("userID").equalTo(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+        appointmentsRef.orderByChild("userID").equalTo(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Clear the list to avoid duplicates
-                CancelledBookingModelArrayList.clear();
-                for(DataSnapshot appoinmentSnapshot : snapshot.getChildren()){
-                    String appointmentID = appoinmentSnapshot.getKey();
-                    String barberID = appoinmentSnapshot.child("barberID").getValue(String.class);
-                    String date = appoinmentSnapshot.child("date").getValue(String.class);
-                    String time = appoinmentSnapshot.child("time").getValue(String.class);
-                    String status = appoinmentSnapshot.child("status").getValue(String.class);
 
-                    if("cancelled".equals(status)){
-                        //fetch Barber Details
+                // Clear the list to avoid duplicates
+                CompletedBookingModelArrayList.clear();
+                for (DataSnapshot appointmentSnapshot : snapshot.getChildren()) {
+                    String appointmentID = appointmentSnapshot.getKey();
+                    String barberID = appointmentSnapshot.child("barberID").getValue(String.class);
+                    String date = appointmentSnapshot.child("date").getValue(String.class);
+                    String time = appointmentSnapshot.child("time").getValue(String.class);
+                    String status = appointmentSnapshot.child("status").getValue(String.class);
+
+                    if ("completed".equals(status)) {
+                        //Fetch Barber Details
                         barberRef.child(barberID).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot barbersnapshot) {
@@ -141,39 +123,40 @@ public class cancelled_booking extends AppCompatActivity {
                                 String location = barbersnapshot.child("location").getValue(String.class);
                                 int profilePicture = R.drawable.usericon;
 
-                                //Add cancelled Booking to the list
-                                CancelledBookingModelArrayList.add(new CancelledBookingModel(profilePicture, username, date, time, location,appointmentID));
+                                // Add new booking to the list
+                                CompletedBookingModelArrayList.add(new CompletedBookingModel(profilePicture, username, date, time, location,appointmentID));
 
-                                //notify adapter
+                                // Notify adapter
                                 adapter.notifyDataSetChanged();
 
                             }
 
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-                                Toast.makeText(cancelled_booking.this, "Failed to load barber details", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(completed_booking.this, "Failed to load barber details", Toast.LENGTH_SHORT).show();
                             }
                         });
+
                     }
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(cancelled_booking.this, "Failed to load appointments", Toast.LENGTH_SHORT).show();
+                Toast.makeText(completed_booking.this, "Failed to load appointments", Toast.LENGTH_SHORT).show();
 
             }
         });
 
     }
 
-
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
 
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.userProfileIcon) {
@@ -185,4 +168,12 @@ public class cancelled_booking extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private String getCurrentUserID() {
+        String currentUserID = null;
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+        Log.d("UserID", "Current User ID: " + currentUserID); // Log the barber ID
+        return currentUserID;
+    }
 }

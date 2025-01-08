@@ -8,42 +8,65 @@ public class Upcoming {
     String serviceType;
     String price;
     String contact;
-    String UpcomingId;
+    String upcomingId;
 
-
-    public String getUpcomingId() {
-        return UpcomingId;
-    }
-
-    public void setUpcomingId(String upcomingId) {
-        UpcomingId = upcomingId;
+    public Upcoming() {
+        // Default constructor required for calls to DataSnapshot.getValue(Upcoming.class)
     }
 
     public String getName() {
         return name;
     }
 
-    public String getDate() {
-        return date;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTime() {
-        return time;
+    public String getUpcomingId() {
+        return upcomingId;
     }
 
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public String getPrice() {
-        return price;
+    public void setUpcomingId(String upcomingId) {
+        this.upcomingId = upcomingId;
     }
 
     public String getContact() {
         return contact;
     }
 
-    public Upcoming (){
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

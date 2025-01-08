@@ -5,14 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cancelledbackground"
-    tools:context=".UserManagementModule.cancelled_booking">
+    android:background="@drawable/pending_barber"
+    tools:context=".pendingBarber">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/toolbaredit"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,63 +23,50 @@
         app:titleMarginStart="155dp" />
 
     <TextView
-        android:id="@+id/TVbacktoHomePage"
+        android:id="@+id/TVpending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="Back"
-        android:textColor="#000000"
-        android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TVcompleted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="Completed"
-        android:textColor="#040000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/TVcancelled"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="212dp"
         android:fontFamily="@font/inter_bold"
-        android:text="Cancelled"
-        android:textColor="#FDFCFC"
+        android:text="pending"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/TVcompleted"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/TVupcoming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="212dp"
         android:fontFamily="@font/inter_medium"
         android:text="Upcoming"
-        android:textColor="#000000"
+        android:textColor="#040000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/TVcompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="212dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Completed"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/TVupcoming"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="407dp"
-        android:layout_height="500dp"
+        android:layout_height="350dp"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVcompleted" />
 

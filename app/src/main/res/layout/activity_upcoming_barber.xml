@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cancelledbackground"
-    tools:context=".UserManagementModule.cancelled_booking">
+    android:background="@drawable/upcoming_barber"
+    tools:context=".BarberManagementModule.upcomingBarber">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -22,24 +22,37 @@
         app:titleMarginStart="155dp" />
 
     <TextView
-        android:id="@+id/TVbacktoHomePage"
+        android:id="@+id/TVpending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="220dp"
         android:fontFamily="@font/inter_medium"
-        android:text="Back"
+        android:text="Pending"
         android:textColor="#000000"
-        android:textSize="13sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/TVupcoming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="220dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Upcoming"
+        android:textColor="#FDFCFC"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/TVpending"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/TVcompleted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="220dp"
         android:fontFamily="@font/inter_medium"
         android:text="Completed"
         android:textColor="#040000"
@@ -47,37 +60,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
-        android:id="@+id/TVcancelled"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="Cancelled"
-        android:textColor="#FDFCFC"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/TVcompleted"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/TVupcoming"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="Upcoming"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
-        android:layout_width="407dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="0dp"
+        android:layout_width="404dp"
+        android:layout_height="357dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVcompleted" />

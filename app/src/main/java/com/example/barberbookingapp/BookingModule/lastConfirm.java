@@ -16,6 +16,9 @@ import com.example.barberbookingapp.R;
 import com.example.barberbookingapp.UserManagementModule.upcoming_booking;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class lastConfirm extends AppCompatActivity {
 
@@ -101,8 +104,17 @@ public class lastConfirm extends AppCompatActivity {
 
     // Method to write the appointment data to Firebase
     private void writeToFirebase(String barberID, String barberLocation, String serviceName, String servicePrice, String date, String time) {
+
+        // Get the current user's ID
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(lastConfirm.this, "User not logged in!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String userID = currentUser.getUid(); // Retrieve the user's ID
+
         // Create a new appointment object with status "pending"
-        Apt appointment = new Apt(barberID, barberLocation, serviceName, servicePrice, date, time, "pending");
+        Apt appointment = new Apt(barberID, barberLocation, serviceName, servicePrice, date, time, "upcoming", userID);
 
         // Write the appointment to Firebase
         String appointmentId = databaseReference.push().getKey();

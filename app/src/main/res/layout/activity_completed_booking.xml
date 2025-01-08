@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cancelledbackground"
-    tools:context=".UserManagementModule.cancelled_booking">
+    android:background="@drawable/completedbackground"
+    tools:context=".UserManagementModule.completed_booking">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -35,32 +35,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TVcompleted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="Completed"
-        android:textColor="#040000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/TVcancelled"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="Cancelled"
-        android:textColor="#FDFCFC"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/TVcompleted"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
         android:id="@+id/TVupcoming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,6 +47,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+    <TextView
+        android:id="@+id/TVcompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Completed"
+        android:textColor="#FDFCFC"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/TVupcoming"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/TVcancelled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Cancelled"
+        android:textColor="#040000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="407dp"
@@ -81,6 +82,5 @@
         android:layout_marginTop="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVcompleted" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

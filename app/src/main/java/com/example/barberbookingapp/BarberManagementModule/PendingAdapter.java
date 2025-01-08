@@ -60,10 +60,10 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.PendingV
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
 
         // Get id of booking
-        String id = pending.pendingId;
+        String id = pending.getPendingId();
 
         // Remove the item from 'pending'
-        databaseRef.child("pending").child(id).removeValue()
+        databaseRef.child(id).child("status").setValue("cancelled")
                 .addOnSuccessListener(aVoid1 -> {
                     // Remove from local list and notify adapter
                     PendingBookingArrayList.remove(position);
@@ -77,32 +77,25 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.PendingV
 
     private void moveItemToUpcoming(Pending pending, int position) {
         // Reference to Firebase
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("appointments");
 
         // Get id of booking
-        String id = pending.pendingId;
+      //  String id = pending.pendingId;
+        String id = pending.getPendingId();
 
-        // Add the item to 'upcoming' with the same key
-        databaseRef.child("upcoming").child(id).setValue(pending)
+        // Update the 'status' field to "upcoming"
+        databaseRef.child(id).child("status").setValue("upcoming")
                 .addOnSuccessListener(aVoid -> {
-                    // Remove the item from 'pending'
-                    databaseRef.child("pending").child(id).removeValue()
-                            .addOnSuccessListener(aVoid1 -> {
-                                // Remove from local list and notify adapter
-                                PendingBookingArrayList.remove(position);
-                                notifyItemRemoved(position);
+                    // Remove the item from local list and notify adapter
+                    PendingBookingArrayList.remove(position);
+                    notifyItemRemoved(position);
 
-                                // Display the key of the moved object
-                                Toast.makeText(context, "Successfully moved Booking ID " + id + " to upcoming", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                // Handle removal error
-                                Toast.makeText(context, "Failed to remove from pending", Toast.LENGTH_SHORT).show();
-                            });
+                    // Notify the user of success
+                    Toast.makeText(context, "Successfully updated status to 'upcoming' for Booking ID " + id, Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    // Handle addition error
-                    Toast.makeText(context, "Failed to move to upcoming", Toast.LENGTH_SHORT).show();
+                    // Handle update error
+                    Toast.makeText(context, "Failed to update status to 'upcoming'", Toast.LENGTH_SHORT).show();
                 });
     }
 

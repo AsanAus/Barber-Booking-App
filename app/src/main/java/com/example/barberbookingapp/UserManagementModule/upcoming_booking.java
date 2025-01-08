@@ -2,6 +2,7 @@ package com.example.barberbookingapp.UserManagementModule;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.barberbookingapp.BookingModule.Booking;
 import com.example.barberbookingapp.BookingModule.appointment;
 import com.example.barberbookingapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,11 +76,24 @@ public class upcoming_booking extends AppCompatActivity {
             }
         });
 
+        TextView completedBooking = findViewById(R.id.TVcompleted);
+        completedBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(upcoming_booking.this, completed_booking.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+
         // Initialize adapter and set to RecyclerView
         adapter = new upcomingBookingAdapter(this, UpcomingBookingModelArrayList);
         recyclerView.setAdapter(adapter);
 
-        fetchAppointmentData();
+        String currentUserID = getCurrentUserID();
+        fetchAppointmentData(currentUserID);
 
         //Handle "Book Now" button
         Button bookNowButton = findViewById(R.id.bookNowButton);
@@ -90,24 +105,34 @@ public class upcoming_booking extends AppCompatActivity {
             }
         });
 
-
-
     }
 
-    private void fetchAppointmentData() {
+    private String getCurrentUserID(){
+        String currentUserID = null;
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+        Log.d("UserID", "Current User ID: " + currentUserID); // Log the barber ID
+        return currentUserID;
+    }
+
+    private void fetchAppointmentData(String currentUserID) {
+        if(currentUserID == null) return;
+
         DatabaseReference appointmentsRef = FirebaseDatabase.getInstance().getReference("appointments");
         DatabaseReference barberRef = FirebaseDatabase.getInstance().getReference("Barbers");
 
-        // Clear the list to avoid duplicates
-        UpcomingBookingModelArrayList.clear();
+
+
 
         //Fetch Appointments
-        appointmentsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        appointmentsRef.orderByChild("userID").equalTo(currentUserID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean hasPendingAppointments = false;
 
-
+                // Clear the list to avoid duplicates
+                UpcomingBookingModelArrayList.clear();
                 for (DataSnapshot appointmentSnapshot : snapshot.getChildren()) {
                         String appointmentID = appointmentSnapshot.getKey();
                         String barberID = appointmentSnapshot.child("barberID").getValue(String.class);
@@ -115,9 +140,9 @@ public class upcoming_booking extends AppCompatActivity {
                         String time = appointmentSnapshot.child("time").getValue(String.class);
                         String status = appointmentSnapshot.child("status").getValue(String.class);
 
-                        if ("pending".equals(status)) {
+                        if ("upcoming".equals(status)) {
                             hasPendingAppointments = true;
-                            //Fetch Babrber Details
+                            //Fetch Barber Details
                             barberRef.child(barberID).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot barbersnapshot) {

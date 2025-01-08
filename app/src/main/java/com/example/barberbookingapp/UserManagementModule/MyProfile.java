@@ -80,13 +80,6 @@ public class MyProfile extends AppCompatActivity {
       //Initialize Firebase Auth and Database Reference
         mAuth = FirebaseAuth.getInstance();
 
-//        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-//        if(firebaseUser == null){
-//            Toast.makeText(MyProfile.this, "Something went wrong!", Toast.LENGTH_LONG).show();
-//        } else {
-//            showUserProfile(firebaseUser);
-//        }
-
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
