@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/pending_barber"
-    tools:context=".pendingBarber">
+    tools:context="BarberManagementModule.pendingBarber">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
