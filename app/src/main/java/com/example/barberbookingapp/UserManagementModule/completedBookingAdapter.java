@@ -9,11 +9,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.barberbookingapp.BarberListViewModule.Feedback;
 import com.example.barberbookingapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -50,13 +57,62 @@ public class completedBookingAdapter extends RecyclerView.Adapter<CompletedBooki
         holder.buttonReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Redirect to cancelled_booking activity
-                //Intent intent = new Intent(context, doneReview_booking.class);
-              //  context.startActivity(intent);
+                getBarberID(model.getAppointmentID(), new BarberIDCallback() {
+                    @Override
+                    public void onSuccess(String barberID) {
+                        Log.d("BarberID", "Retrieved Barber ID: " + barberID);
+
+                        // Start the Feedback activity with the retrieved barberID
+                        Intent intent = new Intent(context, Feedback.class);
+                        intent.putExtra("barberID", barberID);
+                        context.startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(String errorMessage) {
+                        Log.e("BarberID", "Error: " + errorMessage);
+                        // Show an error message to the user
+                        Toast.makeText(context, "Failed to retrieve Barber ID: " + errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
+
         });
 
+    }
+
+    public void getBarberID(String appointmentID, BarberIDCallback callback) {
+        if (appointmentID == null || appointmentID.isEmpty()) {
+            callback.onError("Invalid appointment ID");
+            return;
+        }
+
+        DatabaseReference appointmentsRef = FirebaseDatabase.getInstance().getReference("appointments");
+        appointmentsRef.child(appointmentID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String barberID = snapshot.child("barberID").getValue(String.class);
+                    if (barberID != null) {
+                        callback.onSuccess(barberID);
+                    } else {
+                        callback.onError("Barber ID not found for this appointment.");
+                    }
+                } else {
+                    callback.onError("Appointment not found.");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onError("Failed to fetch data: " + error.getMessage());
+            }
+        });
+    }
+    public interface BarberIDCallback {
+        void onSuccess(String barberID);
+        void onError(String errorMessage);
     }
 
     @Override
@@ -94,6 +150,7 @@ class CompletedBookingModel{
         this.bookingLocation = bookingLocation;
         this.appointmentID = appointmentID;
     }
+
 
     public int getImage() {
         return image;

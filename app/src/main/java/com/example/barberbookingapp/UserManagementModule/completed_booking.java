@@ -124,7 +124,7 @@ public class completed_booking extends AppCompatActivity {
                                 int profilePicture = R.drawable.usericon;
 
                                 // Add new booking to the list
-                                CompletedBookingModelArrayList.add(new CompletedBookingModel(profilePicture, username, date, time, location,appointmentID));
+                                CompletedBookingModelArrayList.add(new CompletedBookingModel(profilePicture, username, date, time, location, appointmentID));
 
                                 // Notify adapter
                                 adapter.notifyDataSetChanged();

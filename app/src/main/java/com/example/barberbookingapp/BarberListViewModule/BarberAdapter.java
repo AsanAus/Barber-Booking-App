@@ -21,7 +21,7 @@ import java.util.List;
 
 public class BarberAdapter extends RecyclerView.Adapter<BarberAdapter.BarberViewHolder> {
 
-    private ArrayList<Barber> barberList = new ArrayList<>();
+    private ArrayList<Barber> barberList;
     private Context context;
 
     public BarberAdapter(Context context, ArrayList<Barber> barberList) {

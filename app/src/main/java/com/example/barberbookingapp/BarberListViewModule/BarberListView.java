@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -15,10 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.barberbookingapp.BookingModule.Booking;
 import com.example.barberbookingapp.R;
 import com.example.barberbookingapp.UserManagementModule.HomePage;
 import com.google.firebase.database.DataSnapshot;
@@ -39,9 +35,7 @@ public class BarberListView extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_barber_list_view);
 
-        // Find the TextView by its ID
-        TextView backToHome = findViewById(R.id.TVbacktoHomePage);//For Back button return to previous page which is(HomePage)
-        // Set an OnClickListener to navigate to HomePageActivity
+        TextView backToHome = findViewById(R.id.TVbacktoHomePage);
         backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

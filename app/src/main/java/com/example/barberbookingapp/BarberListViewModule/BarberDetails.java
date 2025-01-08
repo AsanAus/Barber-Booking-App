@@ -28,9 +28,8 @@ public class BarberDetails extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_barber_details);
 
-        // Find the TextView by its ID
-        TextView backToHome = findViewById(R.id.TVbacktoHomePage);//For Back button return to previous page which is(HomePage)
-        // Set an OnClickListener to navigate to HomePageActivity
+
+        TextView backToHome = findViewById(R.id.TVbacktoHomePage);
         backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
