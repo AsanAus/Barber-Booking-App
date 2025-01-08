@@ -3,6 +3,7 @@ package com.example.barberbookingapp.BarberManagementModule;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,11 +83,15 @@ public class Services extends AppCompatActivity {
         priceEditText = findViewById(R.id.TILETPrice);
         submitButton = findViewById(R.id.BTAddService);
 
+        String currentBarberId = getCurrentBarberId(); // Implement this method to fetch the current barber's ID
+
         // Initialize Firebase components
         FirebaseAuth auth = FirebaseAuth.getInstance();
         barberId = auth.getCurrentUser() != null ? auth.getCurrentUser().getUid() : null;
         firebaseDatabase = FirebaseDatabase.getInstance();
-        serviceReference = firebaseDatabase.getReference("Barbers").child("barber1").child("service");  // Adjust the reference path if necessary
+        serviceReference = firebaseDatabase.getReference("Barbers").child(currentBarberId).child("service");  // Adjust the reference path if necessary
+
+
 
         //display created services
         loadMyServices();
@@ -123,8 +128,9 @@ public class Services extends AppCompatActivity {
     }
 
     private void loadMyServices() {
+        String currentBarberId = getCurrentBarberId(); // Implement this method to fetch the current barber's ID
         recyclerView = findViewById(R.id.rvServices);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Barbers").child("barber1").child("service");;
+        databaseReference = FirebaseDatabase.getInstance().getReference("Barbers").child(currentBarberId).child("service");;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ServicesList = new ArrayList<>();
@@ -148,5 +154,15 @@ public class Services extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    private String getCurrentBarberId() {
+        String currentBarberId = null;
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            currentBarberId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+        Log.d("BarberID", "Current Barber ID: " + currentBarberId); // Log the barber ID
+        return currentBarberId;
     }
 }
