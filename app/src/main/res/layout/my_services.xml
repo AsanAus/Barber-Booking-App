@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/BTBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,7 +66,6 @@
         android:layout_marginEnd="60dp"
         android:background="@drawable/purple_et_background"
         android:ems="10"
-        android:hint="name of your service"
         android:fontFamily="@font/inter"
         android:inputType="text"
         android:padding="14dp"
@@ -138,20 +137,19 @@
         app:prefixTextAppearance="@font/inter"
         app:prefixTextColor="@color/black">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TILETPrice"
-            android:layout_width="194dp"
-            android:layout_height="48dp"
-            android:background="@drawable/purple_et_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/inter"
+            android:background="@drawable/purple_et_background"
             android:inputType="numberDecimal"
             android:maxLength="6"
-            android:hint="0.00"
             android:textColor="@color/grey_text"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/BTAddService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

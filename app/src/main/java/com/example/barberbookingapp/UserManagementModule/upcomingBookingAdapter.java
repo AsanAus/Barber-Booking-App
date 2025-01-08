@@ -2,6 +2,7 @@ package com.example.barberbookingapp.UserManagementModule;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,6 @@ public class upcomingBookingAdapter extends RecyclerView.Adapter<UpcomingBooking
 
     @Override
     public void onBindViewHolder(@NonNull UpcomingBookingHolder holder, int position) {
-
         UpcomingBookingModel model = UpcomingBookingModelArrayList.get(position);
 
         holder.IVbarberProfilePicture.setImageResource(UpcomingBookingModelArrayList.get(position).getImage());
@@ -50,24 +50,36 @@ public class upcomingBookingAdapter extends RecyclerView.Adapter<UpcomingBooking
         holder.BTNcancelled.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Update database to change status from pending to cancelled
-                DatabaseReference appointmentsRef = FirebaseDatabase.getInstance().getReference("appointments");
-                String appointmentID = model.getAppointmentID();
-
-                appointmentsRef.child(appointmentID).child("status").setValue("cancelled").addOnSuccessListener(aVoid -> {
-                    Toast.makeText(context, "Booking cancelled successfully", Toast.LENGTH_SHORT).show();
-                    // Redirect to cancelled_booking activity
+                if (model != null && model.getAppointmentID() != null){
+                    cancelledBookingStatus(model.getAppointmentID());
                     Intent intent = new Intent(context, cancelled_booking.class);
+                    intent.putExtra("appointmentId",model.getAppointmentID());
                     context.startActivity(intent);
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(context, "Failed to cancel booking: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+                }else{
+
+                }
+
 
             }
         });
 
+    }
 
+    private void cancelledBookingStatus(String appointmentID) {
+        if(appointmentID == null){
+            Log.e("CancelledBookingStatus", "Booking ID is null");
+            return;
+        }
+        DatabaseReference appointmentsRef = FirebaseDatabase.getInstance().getReference("appointments");
+        appointmentsRef.child(appointmentID).child("status").setValue("cancelled")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(context, "Booking cancelled", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e("Firebase Error", "Failed to update booking status to 'upcoming'");
+                        Toast.makeText(context, "Failed to accept booking", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override

@@ -88,6 +88,12 @@
             android:name=".BarberManagementModule.BarberProfile"
             android:exported="false" />
         <activity
+            android:name=".BarberManagementModule.pendingBarber"
+            android:exported="false" />
+        <activity
+            android:name=".BarberManagementModule.upcomingBarber"
+            android:exported="false" />
+        <activity
             android:name=".BarberManagementModule.BarberAdmin"
             android:exported="true" />
         <activity

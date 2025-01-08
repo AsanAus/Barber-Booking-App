@@ -13,7 +13,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.barberbookingapp.BarberListViewModule.BarberListView;
 import com.example.barberbookingapp.BookingModule.Booking;
 import com.example.barberbookingapp.BookingModule.appointment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,15 +43,6 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePage.this, upcoming_booking.class);
-                startActivity(intent);
-            }
-        });
-
-        Button BarbersListBTN = findViewById(R.id.BTNbarbers);
-        BarbersListBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomePage.this, BarberListView.class);
                 startActivity(intent);
             }
         });

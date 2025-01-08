@@ -39,14 +39,12 @@
             android:layout_height="wrap_content"
             android:text="Barbers"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="22dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.543"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -100,12 +98,11 @@
                     <TextView
                         android:id="@+id/Barber2NameTV"
                         android:textColor="@color/black"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="43dp"
+                        android:layout_marginLeft="55dp"
                         android:layout_marginTop="90dp"
-                        android:text="Ku Ku Bird"
+                        android:text="Xiang"
                         android:textSize="16sp" />
 
                     <TextView
@@ -115,7 +112,6 @@
                         android:layout_marginLeft="49dp"
                         android:layout_marginTop="110dp"
                         android:textColor="@color/black"
-
                         android:text="Petaling Jaya"
                         android:textSize="10sp" />
 
@@ -179,7 +175,7 @@
                         android:layout_marginLeft="48dp"
                         android:textColor="@color/black"
                         android:layout_marginTop="90dp"
-                        android:text="San Aus"
+                        android:text="SanAus"
                         android:textSize="16sp" />
 
                     <TextView
@@ -323,13 +319,12 @@
 
                     <TextView
                         android:id="@+id/Barber3NameTV"
-                        android:textColor="@color/black"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="33dp"
+                        android:layout_marginLeft="53dp"
                         android:layout_marginTop="90dp"
-                        android:text="Ernest Chean"
+                        android:text="Ernest"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView

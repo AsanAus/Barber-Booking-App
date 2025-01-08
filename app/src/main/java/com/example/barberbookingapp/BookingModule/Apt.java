@@ -8,12 +8,14 @@ public class Apt {
     private String date;
     private String time;
     private String status; // New field for status
+    private String userID; // New field for user ID
+
 
     // Default constructor for Firebase
     public Apt() {
     }
 
-    public Apt(String barberID, String barberLocation, String serviceName, String servicePrice, String date, String time, String status) {
+    public Apt(String barberID, String barberLocation, String serviceName, String servicePrice, String date, String time, String status, String userID) {
         this.barberID = barberID;
         this.barberLocation = barberLocation;
         this.serviceName = serviceName;
@@ -21,6 +23,7 @@ public class Apt {
         this.date = date;
         this.time = time;
         this.status = status; // Initialize status
+        this.userID = userID; // Initialize userID
     }
 
     // Getters and Setters
@@ -50,6 +53,14 @@ public class Apt {
 
     public String getServicePrice() {
         return servicePrice;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public void setServicePrice(String servicePrice) {

@@ -18,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.barberbookingapp.BarberManagementModule.BarberAdmin;
+import com.example.barberbookingapp.BarberManagementModule.pendingBarber;
 import com.example.barberbookingapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -121,7 +122,7 @@ public class BarberLogin extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Login successful
                             Toast.makeText(BarberLogin.this, "Barber Login successful!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(BarberLogin.this, BarberAdmin.class);
+                            Intent intent = new Intent(BarberLogin.this, pendingBarber.class);
                             startActivity(intent);
                         } else {
                             // Login failed

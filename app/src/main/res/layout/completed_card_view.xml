@@ -116,7 +116,8 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/IVServiceType"
             app:layout_constraintStart_toEndOf="@+id/IVServiceType"
-            app:layout_constraintTop_toTopOf="@+id/IVServiceType" />
+            app:layout_constraintTop_toTopOf="@+id/IVServiceType"
+            app:layout_constraintVertical_bias="0.6" />
 
         <TextView
             android:id="@+id/TVPrice"
