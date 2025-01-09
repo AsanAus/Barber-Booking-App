@@ -46,10 +46,10 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="282dp"
-            android:layout_marginLeft="25dp"
+            android:layout_width="286dp"
+            android:layout_height="247dp"
             android:layout_marginVertical="50dp"
-            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="13dp"
             android:fontFamily="@font/inter_medium"
             android:text="Say goodbye to long waits and scheduling headaches with our barber shop booking app! Discover top-rated barber shops near you, explore services, and book your appointment instantly. Customize your experience with features like preferred barber selection, service history tracking, and style inspiration galleries. Get notified about your upcoming appointments. Whether it’s a quick trim or a fresh new look, your perfect barber experience is just a few taps away!"

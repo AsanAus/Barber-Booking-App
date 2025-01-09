@@ -100,7 +100,7 @@ public class completedBarber extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 CompletedBookingModelArrayList.clear();
-               ArrayList<CompletedBookingModel> templist = new ArrayList<>();
+                ArrayList<CompletedBookingModel> templist = new ArrayList<>();
                 Log.d("FirebaseSnapshot", "Number of appointments: " + snapshot.getChildrenCount());
 
                 // Use a single-element array to hold the total income
@@ -113,9 +113,9 @@ public class completedBarber extends AppCompatActivity {
                     String userID =  completedSnapshot.child("userID").getValue(String.class);
 
                     // Filter by bookingId if provided
-                    if (bookingId != null && !bookingId.equals(appointmentID)) {
-                        continue; // Skip appointments that don't match the bookingId
-                    }
+                    //  if (bookingId != null && !bookingId.equals(appointmentID)) {
+                    //       continue; // Skip appointments that don't match the bookingId
+                    //   }
                     Log.d("FirebaseData", "Fetched data: " +  completedSnapshot.getValue());
                     Log.d("AppointmentStatus", "Status: " + status);
                     Log.d("UserID", "Fetched User ID: " + userID);
@@ -138,18 +138,21 @@ public class completedBarber extends AppCompatActivity {
 
 
                                 templist.add(new CompletedBookingModel(username,  price, appointmentID));
+                                Log.d("tempListUpcoming", "templist : "+ templist);
+                                Log.d("tempListUpcomingSize", "templistSize : "+ templist.size());
+                                Log.d("snapshotSize", "snapshotSize : "+snapshot.getChildrenCount());
 
                                 // Update the list and adapter after all data is loaded
-                                if (templist.size() == snapshot.getChildrenCount() || bookingId != null) {
-                                    CompletedBookingModelArrayList.clear();
-                                    CompletedBookingModelArrayList.addAll(templist);
-                                    Log.d("RecyclerView", "Updated PendingBookingModelArrayList size: " + CompletedBookingModelArrayList.size());
-                                    adapter.notifyDataSetChanged();
-                                    Log.d("AdapterUpdate", "RecyclerView adapter notified of data change.");
+
+                                CompletedBookingModelArrayList.clear();
+                                CompletedBookingModelArrayList.addAll(templist);
+                                Log.d("RecyclerViewCompletedBooking", "Updated CompletedBookingModelArrayList size: " + CompletedBookingModelArrayList.size());
+                                adapter.notifyDataSetChanged();
+                                Log.d("AdapterUpdate", "RecyclerView adapter notified of data change.");
 
 
 
-                                }
+
                                 // Update total income in the TextView
                                 TextView totalIncomeTextView = findViewById(R.id.TVtotalIncome);
                                 totalIncomeTextView.setText("RM" + String.format("%.2f", totalIncome[0]));
