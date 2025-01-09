@@ -7,27 +7,31 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import com.bumptech.glide.Glide;
 import com.example.barberbookingapp.GeneralModule.Login;
 import com.example.barberbookingapp.R;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.RoundingParams;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -39,110 +43,59 @@ public class MyProfile extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-//    private String fullname, email;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Initialize Fresco
-        Fresco.initialize(this);
+        Fresco.initialize(this); // Initialize Fresco
         setContentView(R.layout.activity_my_profile);
 
-        // Find the TextView by its ID
-        TextView backToHome = findViewById(R.id.TVbacktoHomePage);//For Back button return to previous page which is(HomePage)
-        // Set an OnClickListener to navigate to HomePageActivity
-        backToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MyProfile.this, HomePage.class);
-                startActivity(intent);
-                finish(); // Optional: Close the current activity
-            }
+        // Back to HomePage button
+        TextView backToHome = findViewById(R.id.TVbacktoHomePage);
+        backToHome.setOnClickListener(v -> {
+            Intent intent = new Intent(MyProfile.this, HomePage.class);
+            startActivity(intent);
+            finish();
         });
 
-      Button editProfileButton = findViewById(R.id.BTNeditprofile);
-      editProfileButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              Intent intent1 = new Intent(MyProfile.this , EditProfile.class);
-              startActivity(intent1);
-              finish();
-          }
-      });
+        // Edit Profile button
+        Button editProfileButton = findViewById(R.id.BTNeditprofile);
+        editProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MyProfile.this, EditProfile.class);
+            startActivity(intent);
+            finish();
+        });
 
-      //Initialize views
-      ivMyProfilePicture = findViewById(R.id.IVMyProfilePicture);
-      tvUsername = findViewById(R.id.TVusername);
-      tvEmail = findViewById(R.id.TVemail);
-      btnLogout = findViewById(R.id.BTNLogOut);
+        // Initialize views
+        ivMyProfilePicture = findViewById(R.id.IVMyProfilePicture);
+        tvUsername = findViewById(R.id.TVusername);
+        tvEmail = findViewById(R.id.TVemail);
+        btnLogout = findViewById(R.id.BTNLogOut);
 
-      //Initialize Firebase Auth and Database Reference
+        // Initialize Firebase Auth and Database Reference
         mAuth = FirebaseAuth.getInstance();
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showLogOutConfirmation();
-            }
-        });
+        // Log Out button
+        btnLogout.setOnClickListener(v -> showLogOutConfirmation());
 
-        //Load user profile data
+        // Load user profile data
         loadUserProfile();
-
     }
 
-//    private void showUserProfile(FirebaseUser firebaseUser) {
-//        String userID = firebaseUser.getUid();
-//
-//        //Extracting User Reference from Database for "Registered Users"
-//        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Users");
-//        referenceProfile.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                HelperClass readUserDetails = snapshot.getValue(HelperClass.class);
-//                if(readUserDetails != null){
-//                    fullname = firebaseUser.getDisplayName();
-//                    email = firebaseUser.getEmail();
-//
-//                    tvUsername.setText(fullname);
-//                    tvEmail.setText(email);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-
     private void showLogOutConfirmation() {
-        // Create an AlertDialog for log out confirmation
         new AlertDialog.Builder(this)
                 .setTitle("Log Out")
                 .setMessage("Are you sure you want to log out?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        logOutAndRedirect();
-                    }
-                })
-                .setNegativeButton("Cancel", null)  // Cancel button does nothing
+                .setPositiveButton("Yes", (dialog, which) -> logOutAndRedirect())
+                .setNegativeButton("Cancel", null)
                 .show();
     }
 
     private void logOutAndRedirect() {
-        // Sign out from Firebase
         mAuth.signOut();
-
-        // Redirect to Login Activity
         Intent intent = new Intent(MyProfile.this, Login.class);
         startActivity(intent);
-        finish();  // Close the current activity
+        finish();
     }
 
     private void loadUserProfile() {
@@ -157,28 +110,26 @@ public class MyProfile extends AppCompatActivity {
                     //Fetch user details
                     String username = snapshot.child("username").getValue(String.class);
                     String email = snapshot.child("email").getValue(String.class);
-                    String profilePicture = snapshot.child("profilePicture").getValue(String.class);
+                    String encodedImage = snapshot.child("profilePicture").getValue(String.class);
 
                     //set TextViews
                     tvUsername.setText(username);
                     tvEmail.setText(email);
 
                     // Decode and set profile image
-                    if (profilePicture != null && !profilePicture.isEmpty()) {
-                        try {
-                            byte[] decodedBytes = Base64.decode(profilePicture, Base64.DEFAULT);
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-                            Uri bitmapUri = saveBitmapToCache(bitmap); // Save Bitmap to cache and get URI
-                            if (bitmapUri != null) {
-                                ivMyProfilePicture.setImageURI(bitmapUri); // Set image URI in Fresco
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    if (encodedImage != null && !encodedImage.isEmpty()) {
+                        Bitmap profileBitmap = decodeBase64(encodedImage);
+                        ivMyProfilePicture.setImageBitmap(profileBitmap);
+
+                        // Apply Glide with circular cropping to display the image
+                        Glide.with(MyProfile.this)
+                                .load(profileBitmap)
+                                .circleCrop()
+                                .placeholder(R.drawable.usericon) // Replace with your placeholder drawable
+                                .into(ivMyProfilePicture);
+
                     } else {
-                        // Fallback image if no profile picture exists
-                        Uri fallbackUri = Uri.parse("res:///" + R.drawable.usericon);
-                        ivMyProfilePicture.setImageURI(fallbackUri);
+                        ivMyProfilePicture.setImageResource(R.drawable.usericon); // Placeholder image
                     }
 
                 }
@@ -186,25 +137,17 @@ public class MyProfile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Error fetching profile", error.toException());
 
             }
         });
     }
 
-    private Uri saveBitmapToCache(Bitmap bitmap) {
-
-        try {
-            File cacheDir = getCacheDir();
-            File tempFile = new File(cacheDir, "profile_picture.jpg");
-            FileOutputStream fos = new FileOutputStream(tempFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.close();
-            return Uri.fromFile(tempFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    // Decode Base64 string to Bitmap
+    private Bitmap decodeBase64(String encodedImage) {
+        byte[] decodedBytes = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
 
     }
-
 }
+

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.barberbookingapp.R;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,14 +39,14 @@ public class EditProfile extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
-
     private EditText etUsername, etEmail, etPhoneNumber,etPassword;
     private ImageView ivUploadPicture;
     private Button btnSaveChanges;
     private Uri profileImageUri;  // URI for the selected image
     private String encodedImage; // Base64 encoded image string (class-level variable)
 
-    public String username, email, password, role, phoneNumber, profilePicture;
+    public String username, email, password, phoneNumber, profilePicture;
+    public static String role = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class EditProfile extends AppCompatActivity {
 
         // Fetch and display user data
         fetchUserProfile();
+
 
         // image upload button
         ivUploadPicture.setOnClickListener(v -> openImageChooser());
@@ -102,11 +104,18 @@ public class EditProfile extends AppCompatActivity {
                         etEmail.setText(userProfile.email);
                         etPhoneNumber.setText(userProfile.phoneNumber);
 
+
                         // If the profile picture exists, load it into the ImageView
                         if (userProfile.profilePicture != null) {
-                            // Convert Base64 string back to Bitmap and display in ImageView
+                            // Decode the Base64 string into a Bitmap
                             Bitmap profileBitmap = decodeBase64(userProfile.profilePicture);
-                            ivUploadPicture.setImageBitmap(profileBitmap);
+
+                            // Apply Glide with circular cropping to display the image
+                            Glide.with(EditProfile.this)
+                                    .load(profileBitmap)
+                                    .circleCrop()
+                                    .placeholder(R.drawable.usericon) // Replace with your placeholder drawable
+                                    .into(ivUploadPicture);
                         }
 
                     }
@@ -133,12 +142,25 @@ public class EditProfile extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
             profileImageUri = data.getData();
-            ivUploadPicture.setImageURI(profileImageUri);
 
-            // Convert the selected image to Base64
+            // Use Glide to load the selected image with circular cropping
+            Glide.with(this)
+                    .load(profileImageUri)
+                    .circleCrop()
+                    .placeholder(R.drawable.usericon) // Replace with your placeholder drawable
+                    .into(ivUploadPicture);
+
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), profileImageUri);
-                encodedImage = encodeToBase64(bitmap);
+
+                // Resize image to prevent large payloads
+                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
+
+                // Display in ImageView
+                ivUploadPicture.setImageBitmap(resizedBitmap);
+
+                // Encode resized image to Base64
+                encodedImage = encodeToBase64(resizedBitmap);
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Failed to process image", Toast.LENGTH_SHORT).show();
@@ -154,7 +176,6 @@ public class EditProfile extends AppCompatActivity {
         String phoneNumber = etPhoneNumber.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -162,6 +183,7 @@ public class EditProfile extends AppCompatActivity {
 
         // Get the current user ID from Firebase Authentication
         String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        UserProfile userProfile = new UserProfile(username, email, password, role, phoneNumber, encodedImage);
 
         // Check if an image was selected and encode it to Base64
         if (profileImageUri != null) {
@@ -175,8 +197,6 @@ public class EditProfile extends AppCompatActivity {
             }
         }
 
-        // Create a UserProfile object with the encoded image
-        UserProfile userProfile = new UserProfile(username, email, password, role, phoneNumber, encodedImage);
 
         // Update user profile in Firebase Realtime Database
         mDatabase.getReference("Users").child(userId).setValue(userProfile)
