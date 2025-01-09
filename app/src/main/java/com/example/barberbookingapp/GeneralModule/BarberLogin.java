@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.barberbookingapp.BarberManagementModule.BarberAdmin;
 import com.example.barberbookingapp.BarberManagementModule.pendingBarber;
 import com.example.barberbookingapp.R;
+import com.example.barberbookingapp.UserManagementModule.HomePage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -120,10 +121,40 @@ public class BarberLogin extends AppCompatActivity {
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // Login successful
-                            Toast.makeText(BarberLogin.this, "Barber Login successful!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(BarberLogin.this, pendingBarber.class);
-                            startActivity(intent);
+                            // Authentication successful, now check the role
+                            DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Barbers");
+                            String userId = auth.getCurrentUser().getUid();
+
+                            userReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot userSnapshot) {
+                                    if (userSnapshot.exists()) {
+                                        // Retrieve the user's role
+                                        String role = userSnapshot.child("role").getValue(String.class);
+
+                                        if ("barber".equals(role)) {
+                                            // Role matches, grant access
+                                            Toast.makeText(BarberLogin.this, "Barber Login successful!", Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(BarberLogin.this, pendingBarber.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Prevent back navigation
+                                            startActivity(intent);
+                                        } else {
+                                            // Role does not match, deny access
+                                            Toast.makeText(BarberLogin.this, "Access denied. You are not authorized.", Toast.LENGTH_LONG).show();
+                                            FirebaseAuth.getInstance().signOut(); // Sign out the unauthorized user
+                                        }
+                                    } else {
+                                        Toast.makeText(BarberLogin.this, "Access denied. You are not authorized.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(BarberLogin.this, "Barber not found.", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+
                         } else {
                             // Login failed
                             Toast.makeText(BarberLogin.this, "Invalid username or password. Please try again.", Toast.LENGTH_LONG).show();

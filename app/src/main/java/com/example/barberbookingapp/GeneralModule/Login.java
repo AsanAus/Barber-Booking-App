@@ -210,12 +210,38 @@ public class Login extends AppCompatActivity {
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // Login successful
-                            Toast.makeText(Login.this, "Login successful!", Toast.LENGTH_LONG).show();
-                            // Redirect to HomePage
-                            Intent intent = new Intent(Login.this, HomePage.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Prevent back navigation
-                            startActivity(intent);
+                            // Authentication successful, now check the role
+                            DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users");
+                            String userId = mAuth.getCurrentUser().getUid();
+
+                            userReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot userSnapshot) {
+                                    if (userSnapshot.exists()) {
+                                        // Retrieve the user's role
+                                        String role = userSnapshot.child("role").getValue(String.class);
+
+                                        if ("user".equals(role)) {
+                                            // Role matches, grant access
+                                            Toast.makeText(Login.this, "Login successful!", Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(Login.this, HomePage.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Prevent back navigation
+                                            startActivity(intent);
+                                        } else {
+                                            // Role does not match, deny access
+                                            Toast.makeText(Login.this, "Access denied. You are not authorized.", Toast.LENGTH_LONG).show();
+                                            FirebaseAuth.getInstance().signOut(); // Sign out the unauthorized user
+                                        }
+                                    } else {
+                                        Toast.makeText(Login.this, "Access denied. You are not authorized.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(Login.this, "User not found.", Toast.LENGTH_LONG).show();
+                                }
+                            });
 
                         } else {
                             // Login failed
