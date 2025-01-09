@@ -138,7 +138,8 @@
                         android:layout_marginTop="140dp"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8sp"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/white"
                         android:background="@drawable/bookingbuttonedit"/>
 
@@ -213,8 +214,9 @@
                         android:background="@drawable/bookingbuttonedit"
                         android:minWidth="150dp"
                         android:text="Select"
+                        android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:textSize="8sp" />
+                        android:textSize="10sp" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -287,7 +289,8 @@
                         android:layout_marginTop="140dp"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8sp"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/white"
                         android:background="@drawable/bookingbuttonedit"/>
 
@@ -360,7 +363,8 @@
                         android:layout_marginTop="140dp"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8sp"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/white"
                         android:background="@drawable/bookingbuttonedit"/>
 
@@ -433,7 +437,8 @@
                         android:layout_marginTop="140dp"
                         android:minWidth="150dp"
                         android:text="Select"
-                        android:textSize="8sp"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/white"
                         android:background="@drawable/bookingbuttonedit"/>
 

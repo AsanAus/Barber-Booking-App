@@ -117,8 +117,8 @@ public class pendingBarber extends AppCompatActivity {
                     String status = pendingSnapshot.child("status").getValue(String.class);
                     String userID = pendingSnapshot.child("userID").getValue(String.class);
                     String appointmentID = pendingSnapshot.getKey();
-                    Log.d("AppointmentStatus", "Status: " + status);
-                    Log.d("UserID", "Fetched User ID: " + userID);
+                    Log.d("AppointmentStatusPendingBooking", "Status: " + status);
+                    Log.d("UserIDPendingBooking", "Fetched User ID: " + userID);
                     if ("upcoming".equals(status)) {
                         userRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -127,14 +127,17 @@ public class pendingBarber extends AppCompatActivity {
                                 String contact = usersnapshot.child("phoneNumber").getValue(String.class);
 
                                 tempList.add(new PendingBookingModel(username, date, time, contact, serviceName, price,appointmentID));
+                                Log.d("tempListPending", "templist : "+tempList);
+                                Log.d("tempListPendingSize", "templistSize : "+tempList.size());
+                                Log.d("snapshotSize", "snapshotSize : "+snapshot.getChildrenCount());
 
-                                if (tempList.size() == snapshot.getChildrenCount()) {
-                                    PendingBookingModelArrayList.clear();
-                                    PendingBookingModelArrayList.addAll(tempList);
-                                    Log.d("RecyclerView", "Updated PendingBookingModelArrayList size: " + PendingBookingModelArrayList.size());
-                                    adapter.notifyDataSetChanged();
-                                    Log.d("AdapterUpdate", "RecyclerView adapter notified of data change.");
-                                }
+
+                                PendingBookingModelArrayList.clear();
+                                PendingBookingModelArrayList.addAll(tempList);
+                                Log.d("RecyclerViewPendingBooking", "Updated PendingBookingModelArrayList size: " + PendingBookingModelArrayList.size());
+                                adapter.notifyDataSetChanged();
+                                Log.d("AdapterUpdate", "RecyclerView adapter notified of data change.");
+
                             }
 
                             @Override

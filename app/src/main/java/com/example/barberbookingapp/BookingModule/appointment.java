@@ -27,11 +27,10 @@ public class appointment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_appointment); // Use a distinct layout for this activity
+        setContentView(R.layout.activity_appointment);
 
-        // Find the TextView by its ID
-        TextView backToHome = findViewById(R.id.TVbacktoHomePage);//For Back button return to previous page which is(HomePage)
-        // Set an OnClickListener to navigate to HomePageActivity
+
+        TextView backToHome = findViewById(R.id.TVbacktoHomePage);
         backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,15 +50,6 @@ public class appointment extends AppCompatActivity {
         chooseBarberBtn = findViewById(R.id.Appointment1ChooseBarberBtn);
         chooseServiceBtn = findViewById(R.id.Appointment1ChooseServiceBtn);
         chooseDateAndTimeBtn = findViewById(R.id.Appointment1ChooseDateAndTimeBtn);
-
-        barberCardView = findViewById(R.id.Appointment2BarberCardView);
-        serviceCardView = findViewById(R.id.Appointment2ServiceCardView);
-        dateAndTimeCardView = findViewById(R.id.Appointment2DateAndTimeCardView);
-
-        // Initially hide all card views
-        barberCardView.setVisibility(View.GONE);
-        serviceCardView.setVisibility(View.GONE);
-        dateAndTimeCardView.setVisibility(View.GONE);
 
         // Handle ChooseBarberBtn click
         chooseBarberBtn.setOnClickListener(v -> {
@@ -81,9 +71,6 @@ public class appointment extends AppCompatActivity {
 
 
     }
-
-
-
 
 
 }

@@ -2,8 +2,10 @@ package com.example.barberbookingapp.BookingModule;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -34,6 +36,16 @@ public class date_and_time extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_date_and_time);
+
+        TextView backToHome = findViewById(R.id.TVback);
+        backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(date_and_time.this, services.class);
+                startActivity(intent);
+                finish(); // Optional: Close the current activity
+            }
+        });
 
         // Initialize Firebase Realtime Database
         databaseReference = FirebaseDatabase.getInstance().getReference("appointments");

@@ -3,6 +3,7 @@ package com.example.barberbookingapp.BookingModule;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.barberbookingapp.R;
+import com.example.barberbookingapp.UserManagementModule.HomePage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,16 @@ public class services extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_services);
+
+        TextView backToHome = findViewById(R.id.TVback);
+        backToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(services.this, Booking.class);
+                startActivity(intent);
+                finish(); // Optional: Close the current activity
+            }
+        });
 
         // Initialize UI components
         CB1 = findViewById(R.id.Service1CheckBox);

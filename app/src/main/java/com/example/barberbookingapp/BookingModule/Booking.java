@@ -45,9 +45,8 @@ public class Booking extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.barber_list);
 
-        // Find the TextView by its ID
-        TextView backToHome = findViewById(R.id.TVbacktoHomePage);//For Back button return to previous page which is(HomePage)
-        // Set an OnClickListener to navigate to HomePageActivity
+
+        TextView backToHome = findViewById(R.id.TVbacktoHomePage);
         backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

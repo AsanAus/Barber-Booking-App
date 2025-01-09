@@ -130,7 +130,7 @@ public class Services extends AppCompatActivity {
     private void loadMyServices() {
         String currentBarberId = getCurrentBarberId(); // Implement this method to fetch the current barber's ID
         recyclerView = findViewById(R.id.rvServices);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Barbers").child(currentBarberId).child("service");;
+        databaseReference = FirebaseDatabase.getInstance().getReference("Barbers").child(currentBarberId).child("service");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ServicesList = new ArrayList<>();

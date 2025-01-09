@@ -34,9 +34,9 @@ public class upcomingBarber extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<UpcomingBarberModel> UpcomingBarberModelArrayList = new ArrayList<>();
-    
+
     upcomingBarberAdapter adapter;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,7 @@ public class upcomingBarber extends AppCompatActivity {
         });
 
         TextView CompletedBooking = findViewById(R.id.TVcompleted);
-       CompletedBooking.setOnClickListener(new View.OnClickListener() {
+        CompletedBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(upcomingBarber.this, completedBarber.class);
@@ -85,15 +85,18 @@ public class upcomingBarber extends AppCompatActivity {
             // Handle the received bookingId (if needed)
         } else {
             Log.d("BookingID", "No bookingId passed to this activity.");
+            // String currentBookingID = getCurrentBookingID();
         }
 
         // Replace "currentBarberId" with the actual ID of the logged-in barber
         String currentBarberId = getCurrentBarberId(); // Implement this method to fetch the current barber's ID
-        
+
         fetchUpcomingBooking(currentBarberId,bookingId);
 
 
     }
+
+
 
     private void fetchUpcomingBooking(String currentBarberId, String bookingId) {
         if (currentBarberId == null) return; // No action if barberID is null
@@ -119,9 +122,9 @@ public class upcomingBarber extends AppCompatActivity {
                     String userID =  upcomingSnapshot.child("userID").getValue(String.class);
 
                     // Filter by bookingId if provided
-                    if (bookingId != null && !bookingId.equals(appointmentID)) {
-                        continue; // Skip appointments that don't match the bookingId
-                    }
+                    //   if (bookingId != null && !bookingId.equals(appointmentID)) {
+                    //       continue; // Skip appointments that don't match the bookingId
+                    //   }
                     Log.d("FirebaseData", "Fetched data: " +  upcomingSnapshot.getValue());
                     Log.d("AppointmentStatus", "Status: " + status);
                     Log.d("UserID", "Fetched User ID: " + userID);
@@ -134,15 +137,17 @@ public class upcomingBarber extends AppCompatActivity {
                                 String contact = usersnapshot.child("phoneNumber").getValue(String.class);
 
                                 tempList.add(new UpcomingBarberModel(username, date, time, contact, serviceName, price, appointmentID));
+                                Log.d("tempListUpcoming", "templist : "+tempList);
+                                Log.d("tempListUpcomingSize", "templistSize : "+tempList.size());
+                                Log.d("snapshotSize", "snapshotSize : "+snapshot.getChildrenCount());
 
-                                // Update the list and adapter after all data is loaded
-                                if (tempList.size() == snapshot.getChildrenCount() || bookingId != null) {
-                                    UpcomingBarberModelArrayList.clear();
-                                    UpcomingBarberModelArrayList.addAll(tempList);
-                                    Log.d("RecyclerView", "Updated PendingBookingModelArrayList size: " + UpcomingBarberModelArrayList.size());
-                                    adapter.notifyDataSetChanged();
-                                    Log.d("AdapterUpdate", "RecyclerView adapter notified of data change.");
-                                }
+
+                                UpcomingBarberModelArrayList.clear();
+                                UpcomingBarberModelArrayList.addAll(tempList);
+                                Log.d("RecyclerViewUpcomingBooking", "Updated upcomingBookingModelArrayList size: " + UpcomingBarberModelArrayList.size());
+                                adapter.notifyDataSetChanged();
+                                Log.d("AdapterUpdate", "RecyclerView adapter notified of data change.");
+
                             }
 
                             @Override

@@ -5,8 +5,8 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     app:cardBackgroundColor="@color/purple2"
     app:cardCornerRadius="35dp"
     app:cardElevation="4dp">
