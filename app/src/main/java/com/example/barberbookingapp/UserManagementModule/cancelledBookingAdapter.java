@@ -1,6 +1,9 @@
 package com.example.barberbookingapp.UserManagementModule;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +37,27 @@ public class cancelledBookingAdapter extends RecyclerView.Adapter<CancelledBooki
 
     @Override
     public void onBindViewHolder(@NonNull CancelledBookingHolder holder, int position) {
+        CancelledBookingModel model = CancelledBookingModelArrayList.get(position);
 
-        holder.IVbarberProfilePicture.setImageResource(CancelledBookingModelArrayList.get(position).getImage());
         holder.TVbarberName.setText(CancelledBookingModelArrayList.get(position).getBarberName());
         holder.TVbookingDate.setText(CancelledBookingModelArrayList.get(position).getBookingDate());
         holder.TVbookingTime.setText(CancelledBookingModelArrayList.get(position).getBookingTime());
         holder.TVbookingLocation.setText(CancelledBookingModelArrayList.get(position).getBookingLocation());
+
+        String profileImageBase64 = model.getImage();
+        if (profileImageBase64 != null && !profileImageBase64.isEmpty()) {
+            Bitmap bitmap = decodeBase64ToBitmap(profileImageBase64);
+            holder.IVbarberProfilePicture.setImageBitmap(bitmap);
+        } else {
+            // Set a placeholder image if no profileImage is available
+            holder.IVbarberProfilePicture.setImageResource(R.drawable.usericon);
+        }
+    }
+
+    private Bitmap decodeBase64ToBitmap(String profileImageBase64) {
+        byte[] decodedBytes = Base64.decode(profileImageBase64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+
     }
 
     @Override
@@ -68,10 +86,10 @@ class CancelledBookingHolder extends RecyclerView.ViewHolder{
 
 ///////////////////////////////////CancelledBookingModel//////////////////////////////
 class CancelledBookingModel{
-    int image;
+    String image;
     String barberName, bookingDate, bookingTime , bookingLocation,appointmentID;
 
-    public CancelledBookingModel(int image,String barberName, String bookingDate, String bookingTime, String bookingLocation, String appointmentID) {
+    public CancelledBookingModel(String image,String barberName, String bookingDate, String bookingTime, String bookingLocation, String appointmentID) {
         this.image = image;
         this.barberName = barberName;
         this.bookingDate = bookingDate;
@@ -80,11 +98,11 @@ class CancelledBookingModel{
         this.appointmentID = appointmentID;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

@@ -79,6 +79,7 @@
         android:layout_height="500dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="36dp"
+        tools:listitem="cancelled_booking_item"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVcompleted" />
 
