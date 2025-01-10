@@ -16,7 +16,7 @@
         android:layout_margin="20dp"
         android:layout_width="141dp"
         android:layout_height="115dp"
-        android:background="@drawable/usericon" />
+        android:src="@drawable/usericon" />
 
     <TextView
         android:id="@+id/TVbarberName"
