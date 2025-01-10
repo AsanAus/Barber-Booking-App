@@ -6,9 +6,12 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -31,6 +34,8 @@ public class BarberDetails extends AppCompatActivity {
     private TextView detailsTextView;
     private TextView locationTextView;
     private TextView phoneNumberTextView;
+
+    private LinearLayout galleryContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,70 @@ public class BarberDetails extends AppCompatActivity {
             return insets;
         });
 
+        galleryContainer = findViewById(R.id.galleryContainer);
+        // Fetch images from Firebase
+        fetchImagesFromDatabase(barberId);
+
+
+    }
+
+    private void fetchImagesFromDatabase(String barberId) {
+        if (barberId == null || barberId.isEmpty()) {
+            Log.e("fetchImagesFromDatabase", "barberId is null or empty");
+            Toast.makeText(this, "Error: Barber ID is missing.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Gallery");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean imageFound = false;
+
+                for (DataSnapshot gallerySnapshot : snapshot.getChildren()) {
+                    // Retrieve the BarberId for the current gallery entry
+                    String galleryBarberId = gallerySnapshot.child("BarberId").getValue(String.class);
+
+                    if (barberId.equals(galleryBarberId)) {
+                        // Retrieve the image for the matching BarberId
+                        String base64Image = gallerySnapshot.child("image").getValue(String.class);
+                        if (base64Image != null) {
+                            Log.d("GalleryImage", "Base64 Image: " + base64Image);
+                            addImageToGallery(base64Image);
+                            imageFound = true;
+                        } else {
+                            Log.w("GalleryImage", "Image is null for key: " + gallerySnapshot.getKey());
+                        }
+                    }
+                }
+
+                if (!imageFound) {
+                    Toast.makeText(BarberDetails.this, "No images found for this barber", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(BarberDetails.this, "Failed to load images", Toast.LENGTH_SHORT).show();
+                Log.e("FirebaseError", "Error: " + error.getMessage());
+            }
+        });
+
+    }
+    private void addImageToGallery(String base64Image) {
+        View cardView = LayoutInflater.from(this).inflate(R.layout.gallery_card, galleryContainer, false);
+
+        // Decode Base64 to Bitmap
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        // Set the image in the ImageView
+        ImageView imageView = cardView.findViewById(R.id.galleryImageView);
+        imageView.setImageBitmap(decodedBitmap);
+
+        // Add the CardView to the gallery container
+        galleryContainer.addView(cardView);
     }
 
     private Bitmap decodeBase64ToBitmap(String profileImageBase64) {

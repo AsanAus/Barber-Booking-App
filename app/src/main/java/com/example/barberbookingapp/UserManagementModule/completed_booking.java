@@ -121,7 +121,7 @@ public class completed_booking extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot barbersnapshot) {
                                 String username = barbersnapshot.child("username").getValue(String.class);
                                 String location = barbersnapshot.child("location").getValue(String.class);
-                                int profilePicture = R.drawable.usericon;
+                                String profilePicture = barbersnapshot.child("profileImage").getValue(String.class);
 
                                 // Add new booking to the list
                                 CompletedBookingModelArrayList.add(new CompletedBookingModel(profilePicture, username, date, time, location, appointmentID));

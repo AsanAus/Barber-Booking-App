@@ -2,6 +2,9 @@ package com.example.barberbookingapp.UserManagementModule;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,11 +49,19 @@ public class completedBookingAdapter extends RecyclerView.Adapter<CompletedBooki
     public void onBindViewHolder(@NonNull CompletedBookingHolder holder, int position) {
         CompletedBookingModel model = CompletedBookingModelArrayList.get(position);
 
-        holder.IVbarberProfilePicture.setImageResource(CompletedBookingModelArrayList.get(position).getImage());
         holder.TVbarberName.setText(CompletedBookingModelArrayList.get(position).getBarberName());
         holder.TVbookingDate.setText(CompletedBookingModelArrayList.get(position).getBookingDate());
         holder.TVbookingTime.setText(CompletedBookingModelArrayList.get(position).getBookingTime());
         holder.TVbookingLocation.setText(CompletedBookingModelArrayList.get(position).getBookingLocation());
+
+        String profileImageBase64 = model.getImage();
+        if (profileImageBase64 != null && !profileImageBase64.isEmpty()) {
+            Bitmap bitmap = decodeBase64ToBitmap(profileImageBase64);
+            holder.IVbarberProfilePicture.setImageBitmap(bitmap);
+        } else {
+            // Set a placeholder image if no profileImage is available
+            holder.IVbarberProfilePicture.setImageResource(R.drawable.usericon);
+        }
 
         Log.d("BindViewHolder", "Binding data for position " + holder);
 
@@ -80,6 +91,11 @@ public class completedBookingAdapter extends RecyclerView.Adapter<CompletedBooki
 
         });
 
+    }
+
+    private Bitmap decodeBase64ToBitmap(String profileImageBase64) {
+        byte[] decodedBytes = Base64.decode(profileImageBase64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
     public void getBarberID(String appointmentID, BarberIDCallback callback) {
@@ -139,10 +155,10 @@ class CompletedBookingHolder extends RecyclerView.ViewHolder{
 }
 
 class CompletedBookingModel{
-    int image;
+    String image;
     String barberName, bookingDate, bookingTime , bookingLocation, appointmentID;
 
-    public CompletedBookingModel(int image, String barberName, String bookingDate, String bookingTime, String bookingLocation, String appointmentID) {
+    public CompletedBookingModel(String image, String barberName, String bookingDate, String bookingTime, String bookingLocation, String appointmentID) {
         this.image = image;
         this.barberName = barberName;
         this.bookingDate = bookingDate;
@@ -152,11 +168,11 @@ class CompletedBookingModel{
     }
 
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
