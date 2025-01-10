@@ -5,13 +5,28 @@ import android.os.Parcelable;
 
 public class Barber implements Parcelable{
 
-    private String barberId;  // Add barberId field
-    private String username;
-    private String location;
-    private double rating;
-    private String profileImage;
+    public String barberId;  // Add barberId field
+    public String username;
+    public String location;
+    public double rating;
+    public String profileImage;
+    public String details;
+    public String role = "barber";
+    public String description;
 
-    private String details;
+    public String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
     public String getDetails() {
@@ -108,7 +123,6 @@ public class Barber implements Parcelable{
         }
     };
 
-
     public int describeContents() {
         return 0;
     }
@@ -120,5 +134,13 @@ public class Barber implements Parcelable{
         parcel.writeDouble(rating);
         parcel.writeString(profileImage);
         parcel.writeString(details);
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

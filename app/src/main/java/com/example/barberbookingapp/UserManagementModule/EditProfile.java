@@ -267,6 +267,7 @@ public class EditProfile extends AppCompatActivity {
     public static class UserProfile {
 
         public String username, email, password, role, phoneNumber, profilePicture;
+
         public UserProfile(String username, String email,String password,String role, String phoneNumber, String profilePicture) {
             this.username = username;
             this.email = email;

@@ -63,8 +63,7 @@ public class BarberAdapter extends RecyclerView.Adapter<BarberAdapter.BarberView
             // Create an Intent to navigate to BarberDetails activity
             Intent intent = new Intent(context, BarberDetails.class);
 
-            // Pass the entire Barber object to the BarberDetails activity
-            intent.putExtra("selectedBarber", barber); // Pass the Barber object
+            intent.putExtra("barberId", barber.getBarberId());
             context.startActivity(intent);
 
         });

@@ -28,7 +28,7 @@ public class Splashing extends AppCompatActivity {
                 startActivity(intent);
                 finish(); // Close Splashing activity so it doesn't come back
             }
-        }, 3000); // 2000ms = 2 seconds
+        }, 2000); // 2000ms = 2 seconds
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
