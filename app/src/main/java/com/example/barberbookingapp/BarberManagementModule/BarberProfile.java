@@ -19,6 +19,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.barberbookingapp.GeneralModule.BarberLogin;
 import com.example.barberbookingapp.GeneralModule.Login;
 import com.example.barberbookingapp.R;
@@ -130,28 +131,19 @@ public class BarberProfile extends AppCompatActivity {
                 if(snapshot.exists()){
                     //Fetch user details
                     String username = snapshot.child("username").getValue(String.class);
-                    String profilePicture = snapshot.child("profilePicture").getValue(String.class);
+                    String profileImage = snapshot.child("profileImage").getValue(String.class);
 
                     //set TextViews
                     tvBarberName.setText(username);
 
-
                     // Decode and set profile image
-                    if (profilePicture != null && !profilePicture.isEmpty()) {
-                        try {
-                            byte[] decodedBytes = Base64.decode(profilePicture, Base64.DEFAULT);
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-                            Uri bitmapUri = saveBitmapToCache(bitmap); // Save Bitmap to cache and get URI
-                            if (bitmapUri != null) {
-                                ivMyProfilePicture.setImageURI(bitmapUri); // Set image URI in Fresco
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    if (profileImage != null && !profileImage.isEmpty()) {
+                        Bitmap profileBitmap = decodeBase64(profileImage);
+                        ivMyProfilePicture.setImageBitmap(profileBitmap);
+
+
                     } else {
-                        // Fallback image if no profile picture exists
-                        Uri fallbackUri = Uri.parse("res:///" + R.drawable.usericon);
-                        ivMyProfilePicture.setImageURI(fallbackUri);
+                        ivMyProfilePicture.setImageResource(R.drawable.usericon); // Placeholder image
                     }
 
                 }
@@ -163,19 +155,12 @@ public class BarberProfile extends AppCompatActivity {
             }
         });
     }
-    private Uri saveBitmapToCache(Bitmap bitmap) {
 
-        try {
-            File cacheDir = getCacheDir();
-            File tempFile = new File(cacheDir, "profile_picture.jpg");
-            FileOutputStream fos = new FileOutputStream(tempFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.close();
-            return Uri.fromFile(tempFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    // Decode Base64 string to Bitmap
+    private Bitmap decodeBase64(String encodedImage) {
+        byte[] decodedBytes = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
 
     }
+
 }
