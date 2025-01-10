@@ -1,7 +1,10 @@
 package com.example.barberbookingapp.BarberListViewModule;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -83,9 +86,10 @@ public class BarberListView extends AppCompatActivity {
                     String username = barberSnapshot.child("username").getValue(String.class);
                     String location = barberSnapshot.child("location").getValue(String.class);
                     double rating = barberSnapshot.child("rating").getValue(Double.class);
+                    String profileImage = barberSnapshot.child("profileImage").getValue(String.class);
 
                     // Create a new Barber object with the barberId and other fields
-                    Barber barber = new Barber(barberId, username, location, rating, 0);  // 0 for imageResourceId (if not needed yet)
+                    Barber barber = new Barber(barberId, username, location, rating, profileImage);
 
                     if (barber != null && barber.getUsername() != null) {
                         Log.d("Firebase", "Username: " + barber.getUsername());
@@ -104,5 +108,6 @@ public class BarberListView extends AppCompatActivity {
             }
         });
     }
+
 
 }

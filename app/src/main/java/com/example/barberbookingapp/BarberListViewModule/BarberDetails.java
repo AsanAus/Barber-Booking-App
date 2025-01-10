@@ -1,7 +1,10 @@
 package com.example.barberbookingapp.BarberListViewModule;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -66,9 +69,23 @@ public class BarberDetails extends AppCompatActivity {
             barberListTV.setText(selectedBarber.getUsername());
             detailsTextView.setText(selectedBarber.getDetails());
             locationTextView.setText(selectedBarber.getLocation());
-            barberImageView.setImageResource(selectedBarber.getImageResourceId());
+
+            String profileImageBase64 = selectedBarber.getProfileImage();
+            if (profileImageBase64 != null && !profileImageBase64.isEmpty()) {
+                Bitmap bitmap = decodeBase64ToBitmap(profileImageBase64);
+                barberImageView.setImageBitmap(bitmap);
+            } else {
+                // Set a placeholder image if no profileImage is available
+                barberImageView.setImageResource(R.drawable.usericon);
+            }
         }
 
+
+    }
+
+    private Bitmap decodeBase64ToBitmap(String profileImageBase64) {
+        byte[] decodedBytes = Base64.decode(profileImageBase64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
 
     }
 }

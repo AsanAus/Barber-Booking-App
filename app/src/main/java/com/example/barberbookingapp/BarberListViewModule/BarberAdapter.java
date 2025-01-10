@@ -2,6 +2,9 @@ package com.example.barberbookingapp.BarberListViewModule;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.barberbookingapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BarberAdapter extends RecyclerView.Adapter<BarberAdapter.BarberViewHolder> {
 
@@ -43,7 +45,16 @@ public class BarberAdapter extends RecyclerView.Adapter<BarberAdapter.BarberView
         holder.barberNameTextView.setText(barber.getUsername());
         holder.barberLocationTextView.setText(barber.getLocation());
         holder.barberRatingBar.setRating(barber.getRating());
-        // Load image if necessary
+
+        String profileImageBase64 = barber.getProfileImage();
+        if (profileImageBase64 != null && !profileImageBase64.isEmpty()) {
+            Bitmap bitmap = decodeBase64ToBitmap(profileImageBase64);
+            holder.barberImageView.setImageBitmap(bitmap);
+        } else {
+            // Set a placeholder image if no profileImage is available
+            holder.barberImageView.setImageResource(R.drawable.usericon);
+        }
+
 
         holder.barberSelectButton.setOnClickListener(v -> {
             // Handle button click
@@ -58,6 +69,13 @@ public class BarberAdapter extends RecyclerView.Adapter<BarberAdapter.BarberView
 
         });
     }
+
+    private Bitmap decodeBase64ToBitmap(String profileImageBase64) {
+        byte[] decodedBytes = Base64.decode(profileImageBase64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+
+    }
+
 
     @Override
     public int getItemCount() {

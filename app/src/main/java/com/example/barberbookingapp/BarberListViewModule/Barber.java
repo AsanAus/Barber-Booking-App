@@ -9,9 +9,10 @@ public class Barber implements Parcelable{
     private String username;
     private String location;
     private double rating;
-    private int imageResourceId;
+    private String profileImage;
 
     private String details;
+
 
     public String getDetails() {
         return details;
@@ -45,12 +46,12 @@ public class Barber implements Parcelable{
         this.rating = rating;
     }
 
-    public int getImageResourceId() {
-        return imageResourceId;
+    public String getProfileImage() {
+        return profileImage;
     }
 
-    public void setImageResourceId(int imageResourceId) {
-        this.imageResourceId = imageResourceId;
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     // Getter and Setter for barberId
@@ -62,21 +63,21 @@ public class Barber implements Parcelable{
         this.barberId = barberId;
     }
 
-    public Barber(String barberId, String username, String location, double rating, int imageResourceId) {
+    public Barber(String barberId, String username, String location, double rating, String profileImage) {
         this.barberId = barberId;
         this.username = username;
         this.location = location;
         this.rating = rating;
-        this.imageResourceId = imageResourceId;
+        this.profileImage = profileImage;
 
     }
 
-    public Barber(String barberId, String username, String location, double rating, int imageResourceId, String details) {
+    public Barber(String barberId, String username, String location, double rating, String profileImage, String details) {
         this.barberId = barberId;
         this.username = username;
         this.location = location;
         this.rating = rating;
-        this.imageResourceId = imageResourceId;
+        this.profileImage = profileImage;
         this.details = details;
 
     }
@@ -91,7 +92,7 @@ public class Barber implements Parcelable{
         username = in.readString();
         location = in.readString();
         rating = in.readDouble();
-        imageResourceId = in.readInt();
+        profileImage = in.readString();
         details = in.readString();
     }
 
@@ -117,7 +118,7 @@ public class Barber implements Parcelable{
         parcel.writeString(username);
         parcel.writeString(location);
         parcel.writeDouble(rating);
-        parcel.writeInt(imageResourceId);
+        parcel.writeString(profileImage);
         parcel.writeString(details);
     }
 }
