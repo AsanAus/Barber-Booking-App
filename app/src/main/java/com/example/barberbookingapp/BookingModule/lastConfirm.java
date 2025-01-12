@@ -91,7 +91,7 @@ public class lastConfirm extends AppCompatActivity {
         String selectedTime = getIntent().getStringExtra("selectedTime");
 
         // Set the barber image based on the barberID
-        databaseReference = FirebaseDatabase.getInstance().getReference("Barbers");
+        databaseReference = FirebaseDatabase.getInstance().getReference("appointments");
         databaseReference.child(barberID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

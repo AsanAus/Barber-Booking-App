@@ -32,6 +32,8 @@ import com.google.firebase.storage.StorageReference;
 import android.text.TextUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -183,7 +185,13 @@ public class EditProfile extends AppCompatActivity {
 
         // Get the current user ID from Firebase Authentication
         String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-        UserProfile userProfile = new UserProfile(username, email, password, role, phoneNumber, encodedImage);
+
+        // Prepare the updated values as a Map
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("username", username);
+        updates.put("email", email);
+        updates.put("phone", phoneNumber);
+
 
         // Check if an image was selected and encode it to Base64
         if (profileImageUri != null) {
@@ -199,7 +207,7 @@ public class EditProfile extends AppCompatActivity {
 
 
         // Update user profile in Firebase Realtime Database
-        mDatabase.getReference("Users").child(userId).setValue(userProfile)
+        mDatabase.getReference("Users").child(userId).updateChildren(updates)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // After successfully updating the user profile, update the username in the Usernames node
