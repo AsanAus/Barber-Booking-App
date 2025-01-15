@@ -140,8 +140,6 @@ public class BarberProfile extends AppCompatActivity {
                     if (profileImage != null && !profileImage.isEmpty()) {
                         Bitmap profileBitmap = decodeBase64(profileImage);
                         ivMyProfilePicture.setImageBitmap(profileBitmap);
-
-
                     } else {
                         ivMyProfilePicture.setImageResource(R.drawable.usericon); // Placeholder image
                     }

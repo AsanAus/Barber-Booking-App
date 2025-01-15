@@ -101,6 +101,7 @@ public class BarberListView extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                //error loading barbers from firebase
                 Log.e("FirebaseError", "Failed to read data", error.toException());
             }
         });
